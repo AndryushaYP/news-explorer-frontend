@@ -1,0 +1,61 @@
+.header {
+  width: 1440px;
+  height: 80px;
+  border: solid 1px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__title {
+  padding-left: 104px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  justify-self: flex-start;
+}
+
+.header__btn-container {
+  display: flex;
+  align-items: center;
+  padding-right: 104px;
+  gap: 32px;
+}
+
+.header__btn {
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.header__btn-active {
+  border-bottom: solid 3px #1a1b22;
+}
+
+.header__btn_save-articles {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.header__btn_main {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.header__btn_logout {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 19px;
+  padding-right: 19px;
+  max-width: 176px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  border: 1px solid #1a1b22;
+  border-radius: 100px;
+}
