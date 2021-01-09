@@ -1,0 +1,45 @@
+.card {
+    position: relative;
+    list-style: none;
+    width: 400px;
+    height: 576px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card__img {
+    width: 400px;
+    height: 272px;
+    object-fit: cover;
+}
+
+.card__info {
+    padding: 24px;
+}
+
+.card__keyword {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    margin: 0;
+    padding: 12px 8px;
+    background: white;
+    border-radius: 10px;
+}
+
+.card__btn-delete {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    background: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.card__news-date {
+    margin: 0;
+}

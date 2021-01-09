@@ -1,0 +1,13 @@
+.cards {
+    margin: 0;
+    background: #F5F6F7;
+    padding: 104px 62px;
+}
+
+.cards__list {
+    margin: 0;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
