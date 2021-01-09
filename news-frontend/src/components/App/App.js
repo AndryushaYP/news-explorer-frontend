@@ -1,12 +1,14 @@
-import Header from '../Header/Header';
-import Main from '../Main/Main';
-import './App.css';
+import "./App.css";
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import About from "../About/About";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Main/>
+      <Header />
+      <Main />
+      <About />
     </div>
   );
 }

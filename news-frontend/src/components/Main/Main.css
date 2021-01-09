@@ -1,5 +1,25 @@
 .main {
-    margin: auto;
-    width: 1440px;
-    height: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 416px;
+    padding-left: 416px;
+    padding-right: 416px;
+    color: white;
+}
+
+.main__title {
+    max-width: 608px;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 60px;
+    line-height: 64px;
+}
+
+.main__description {
+    padding-top: 32px;
+    padding-bottom: 64px;
+    text-align: center;
+    margin: 0;
 }
