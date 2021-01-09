@@ -1,0 +1,24 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    padding: 24px 104px;
+}
+
+.footer__copyright {
+    margin: 0;
+}
+
+.footer__navigation {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
