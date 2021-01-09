@@ -1,11 +1,12 @@
 .cards {
     margin: 0;
     background: #F5F6F7;
-    padding: 104px 62px;
+    padding: 62px 104px;
 }
 
 .cards__list {
     margin: 0;
+    padding: 0;
     text-decoration: none;
     display: flex;
     flex-wrap: wrap;

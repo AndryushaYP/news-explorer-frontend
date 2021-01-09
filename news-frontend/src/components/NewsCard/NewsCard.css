@@ -1,45 +1,79 @@
 .card {
-    position: relative;
-    list-style: none;
-    width: 400px;
-    height: 576px;
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
+  position: relative;
+  list-style: none;
+  width: 400px;
+  height: 576px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .card__img {
-    width: 400px;
-    height: 272px;
-    object-fit: cover;
+  width: 400px;
+  height: 272px;
+  object-fit: cover;
 }
 
 .card__info {
-    padding: 24px;
+  padding: 24px;
+}
+.card__title {
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+}
+
+.card__text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.card__source {
+  font-family: "Roboto Slab", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #b6bcbf;
+  text-decoration: none;
 }
 
 .card__keyword {
-    position: absolute;
-    left: 24px;
-    top: 24px;
-    margin: 0;
-    padding: 12px 8px;
-    background: white;
-    border-radius: 10px;
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  margin: 0;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .card__btn-delete {
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    width: 40px;
-    height: 40px;
-    margin: 0;
-    background: white;
-    border-radius: 10px;
-    border: none;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  background: white;
+  border-radius: 10px;
+  border: none;
 }
 
 .card__news-date {
-    margin: 0;
+  margin: 0;
+  font-family: "Roboto";
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
 }

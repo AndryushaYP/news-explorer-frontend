@@ -11,7 +11,7 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
         <p className="card__news-date">{date}</p>
         <h2 className="card__title">{title}</h2>
         <p className="card__text">{text}</p>
-        <a href={link}>{source}</a>
+        <a href={link} className="card__source">{source}</a>
       </div>
     </li>
   );

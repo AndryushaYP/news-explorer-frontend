@@ -1,8 +1,8 @@
 .App {
+  width: 1440px;
   display: flex;
   flex-direction: column;
   background: url('../../images/main-background.jpg') no-repeat;
-  width: 1440px;
   min-height: 576px;
   margin: auto;
 }

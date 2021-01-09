@@ -1,24 +1,32 @@
 .footer {
-    display: flex;
-    justify-content: space-between;
-    color: black;
-    padding: 24px 104px;
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  padding: 24px 104px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
 }
 
 .footer__copyright {
-    margin: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 22px;
+  color: #b6bcbf;
 }
 
 .footer__navigation {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    gap: 40px;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 40px;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
 }
 
 .footer__link {
-    text-decoration: none;
-    color: black;
-    margin: 0;
-    padding: 0;
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  padding: 0;
 }

@@ -1,6 +1,6 @@
 .about {
   display: flex;
-  padding: 80px;
+  padding: 80px 104px;
   padding-right: 216px;
   gap: 56px;
 }
@@ -9,14 +9,22 @@
 }
 
 .about__info {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 
 .about__title {
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
   margin: 0;
 }
 
 .about__description {
   margin: 0;
   padding-top: 24px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
 }
