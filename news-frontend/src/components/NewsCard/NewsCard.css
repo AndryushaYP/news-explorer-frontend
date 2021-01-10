@@ -58,15 +58,41 @@
 }
 
 .card__btn-delete {
+  background: url("../../images/trash.svg") no-repeat white center;
   position: absolute;
   right: 24px;
   top: 24px;
   width: 40px;
   height: 40px;
   margin: 0;
-  background: white;
   border-radius: 10px;
   border: none;
+  transition: 0.6s ease;
+}
+
+.card__span {
+  position: absolute;
+  right: 69px;
+  top: 24px;
+  margin: 0;
+  padding: 13px 8px;
+  background: white;
+  border-radius: 10px;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  opacity: 0;
+  transition: 0.6s ease;
+}
+
+.card__span-active {
+  opacity: 1;
+}
+
+.card__btn-delete:hover {
+  cursor: pointer;
+  background: url("../../images/trash-black.svg") no-repeat white center;
 }
 
 .card__news-date {
