@@ -2,14 +2,14 @@ import "./NewsCard.css";
 import React from "react";
 
 function NewsCard({ img, title, text, link, source, date, keyword }) {
-  const [spanVisible, setSpanVisible] = React.useState("card__span");
+  const [spanClassName, setSpanClassName] = React.useState("card__span");
 
   const handleMouseEnter = (e) => {
-    setSpanVisible("card__span card__span-active");
+    setSpanClassName("card__span card__span-active");
   };
 
   const handleMouseLeave = (e) => {
-    setSpanVisible("card__span");
+    setSpanClassName("card__span");
   }
 
   const onHandleClick = () => {
@@ -20,7 +20,7 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
     <li className="card">
       <img src={img} alt={title} className="card__img"></img>
       <p className="card__keyword">{keyword}</p>
-      <span className={spanVisible}>Убрать из сохраненных</span>
+      <span className={spanClassName}>Убрать из сохраненных</span>
       <button
         className="card__btn-delete"
         type="submit"
