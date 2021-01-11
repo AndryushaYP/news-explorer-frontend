@@ -1,0 +1,33 @@
+.result-not-found {
+  padding: 76px 542px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f6f7;
+}
+
+.result-not-found__title {
+  margin: 0;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+}
+
+.result-not-found__image {
+  background: url("../../images/not-found_v1.svg") no-repeat center;
+  width: 96px;
+  height: 96px;
+}
+
+.result-not-found__description {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  text-align: center;
+}

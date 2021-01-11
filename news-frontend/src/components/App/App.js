@@ -8,6 +8,8 @@ import About from "../About/About";
 import Footer from "../Footer/Footer";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import SavedNews from "../SavedNews/SavedNews";
+import Preloader from "../Preloader/Preloader";
+import ResultNotFound from "../ResultNotFound/ResultNotFound";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route exact path="/">
           <Header headerClassName="header header__main" />
           <Main />
+          <Preloader />
+          <ResultNotFound />
           <NewsCardList />
           <About />
         </Route>
