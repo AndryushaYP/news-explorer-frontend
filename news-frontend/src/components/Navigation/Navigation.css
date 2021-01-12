@@ -3,10 +3,12 @@
   align-items: center;
   gap: 32px;
   color: inherit;
+  fill: inherit;
 }
 
 .navigation__link {
   color: inherit;
+  fill: inherit;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
@@ -41,12 +43,26 @@
   border-radius: 100px;
 }
 
-.navigation__link_type_logout {
+.navigation__link_type_logout-main {
+  background: url("../../images/logout.svg") no-repeat;
+  background-position: center right 19px;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 19px;
   padding-right: 19px;
-  max-width: 176px;
+  width: 90px;
+  border: 1px solid;
+  border-radius: 100px;
+}
+
+.navigation__link_type_logout-saved-news {
+  background: url("../../images/logout-black.svg") no-repeat;
+  background-position: center right 19px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 19px;
+  padding-right: 19px;
+  width: 90px;
   border: 1px solid;
   border-radius: 100px;
 }

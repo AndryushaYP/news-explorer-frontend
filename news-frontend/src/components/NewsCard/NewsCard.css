@@ -32,7 +32,7 @@
   line-height: 30px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -73,8 +73,7 @@
   line-height: 24px;
 }
 
-.card__btn-delete {
-  background: url("../../images/trash.svg") no-repeat white center;
+.card__btn {
   position: absolute;
   right: 24px;
   top: 24px;
@@ -84,6 +83,27 @@
   border-radius: 10px;
   border: none;
   transition: 0.6s ease;
+  cursor: pointer;
+}
+
+.card__btn_type_save {
+  background: url("../../images/bookmark.svg") no-repeat white center;
+}
+
+.card__btn_type_save:hover {
+  background: url("../../images/bookmark-black.svg") no-repeat white center;
+}
+
+.card__btn_type_save-active {
+  background: url("../../images/bookmark-blue.svg") no-repeat white center;
+}
+
+.card__btn-delete {
+  background: url("../../images/trash.svg") no-repeat white center;
+}
+
+.card__btn-delete:hover {
+  background: url("../../images/trash-black.svg") no-repeat white center;
 }
 
 .card__span {
@@ -104,11 +124,6 @@
 
 .card__span-active {
   opacity: 1;
-}
-
-.card__btn-delete:hover {
-  cursor: pointer;
-  background: url("../../images/trash-black.svg") no-repeat white center;
 }
 
 .card__news-date {

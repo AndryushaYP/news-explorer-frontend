@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid 1px #d1d2d6;
+  border-bottom: 1px solid rgba(209, 210, 214, 0.4);
 }
 
 .header__main {
@@ -13,7 +13,7 @@
 
 .header__saved-news {
   background: white;
-  color: black;
+  color: #1A1B22;
   margin-bottom: 0;
 }
 

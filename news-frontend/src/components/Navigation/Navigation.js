@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import "./Navigation.css";
 
 function Navigation({ loggedIn }) {
@@ -25,9 +25,18 @@ function Navigation({ loggedIn }) {
           >
             Сохраненные статьи
           </NavLink>
-          <NavLink to="/" className="navigation__link navigation__link_type_logout">
-            Андрей
-          </NavLink>
+          <Switch>
+            <Route exact path="/">
+              <NavLink to="/" className="navigation__link navigation__link_type_logout-main">
+                Андрей
+              </NavLink>
+            </Route>
+            <Route path="/saved-news">
+              <NavLink to="/" className="navigation__link navigation__link_type_logout-saved-news">
+                Андрей
+              </NavLink>
+            </Route>
+          </Switch>
         </>
       )}
     </nav>
