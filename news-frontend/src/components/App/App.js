@@ -10,13 +10,27 @@ import NewsCardList from "../NewsCardList/NewsCardList";
 import SavedNews from "../SavedNews/SavedNews";
 import Preloader from "../Preloader/Preloader";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
+import arrCard from "../../utils/arrCard";
+import Login from "../Login/Login";
 
 function App() {
+  const [isLoginOpen, setIsLoginOpen] = React.useState(false);
+
+  function handleAuthorizationOpen() {
+    setIsLoginOpen(true);
+  }
+
+  function closeAllPopup() {
+    setIsLoginOpen(false);
+  }
   return (
     <div className="App">
       <Switch>
         <Route exact path="/">
-          <Header headerClassName="header header__main" />
+          <Header
+            onAuthorizeClick={handleAuthorizationOpen}
+            headerClassName="header header__main"
+          />
           <Main />
           <Preloader />
           <ResultNotFound />
@@ -25,9 +39,10 @@ function App() {
         </Route>
         <Route path="/saved-news">
           <Header headerClassName="header header__saved-news" />
-          <SavedNews />
+          <SavedNews cards={arrCard} />
         </Route>
       </Switch>
+      <Login isOpen={isLoginOpen} onClose={closeAllPopup} />
       <Footer />
     </div>
   );

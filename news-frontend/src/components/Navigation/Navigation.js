@@ -1,7 +1,7 @@
 import { NavLink, Route, Switch } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ loggedIn }) {
+function Navigation({ loggedIn, onAuthorizeClick }) {
   return (
     <nav className="navigation">
       <NavLink
@@ -27,12 +27,20 @@ function Navigation({ loggedIn }) {
           </NavLink>
           <Switch>
             <Route exact path="/">
-              <NavLink to="/" className="navigation__link navigation__link_type_logout-main">
+              <NavLink
+                to="/"
+                className="navigation__link navigation__link_type_logout-main"
+                onClick={onAuthorizeClick}
+              >
                 Андрей
               </NavLink>
             </Route>
             <Route path="/saved-news">
-              <NavLink to="/" className="navigation__link navigation__link_type_logout-saved-news">
+              <NavLink
+                to="/"
+                className="navigation__link navigation__link_type_logout-saved-news"
+                onClick={onAuthorizeClick}
+              >
                 Андрей
               </NavLink>
             </Route>

@@ -3,10 +3,10 @@ import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 
 import "./SavedNews.css";
 
-function SavedNews() {
+function SavedNews({ cards }) {
   return (
     <>
-      <SavedNewsHeader />
+      <SavedNewsHeader cards={cards} />
       <NewsCardList />
     </>
   );
