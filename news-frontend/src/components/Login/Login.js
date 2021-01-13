@@ -3,7 +3,11 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
 function Login({ onLogin, isOpen, onClose }) {
   const handleChange = (e) => {};
-  const handleSubmit = (e) => {};
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin();
+  };
 
   return (
     <PopupWithForm

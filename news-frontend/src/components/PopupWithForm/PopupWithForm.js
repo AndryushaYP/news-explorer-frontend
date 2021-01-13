@@ -2,7 +2,7 @@ import "./PopupWithForm.css";
 
 function PopupWithForm({ name, title, onSubmit, children, btnValue, onClose, isOpen }) {
   return (
-    <div className={`popup popup_type_${name} ${isOpen && "popup_opened"}`}>
+    <div className={`popup popup_type_${name} ${isOpen && "popup_opened"}`} onClick={onClose}>
       <form
         onSubmit={onSubmit}
         name={name}
