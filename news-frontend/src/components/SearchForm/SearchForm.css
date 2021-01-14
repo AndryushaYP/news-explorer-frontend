@@ -39,4 +39,14 @@
   font-size: 18px;
   line-height: 24px;
   color: white;
+  transition: 0.7s ease;
+  cursor: pointer;
+}
+
+.search-form__btn:hover {
+  background: #347eff;
+}
+
+.search-form__btn:active {
+  background: #2a65cc;
 }

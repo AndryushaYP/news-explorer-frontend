@@ -16,12 +16,16 @@
   color: #1a1b22;
   align-self: center;
   margin-top: 64px;
+  transition: 0.7s ease;
+}
+
+.button__main:hover {
+  opacity: 0.9;
 }
 
 .button__header {
   color: inherit;
   fill: inherit;
-
   margin: 0;
   padding: 0;
   background: transparent;
