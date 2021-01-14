@@ -47,7 +47,7 @@ function NewsCardList() {
                   />
                 ))}
           </ul>
-          <Button onClick={handleButton} name="Показать ещё" className="button__main" />
+          <Button onClick={handleButton} name="Показать ещё" className="button button__main" />
         </Route>
 
         <Route path="/saved-news">

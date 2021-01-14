@@ -29,12 +29,6 @@ function App() {
   //Стейт для изменения состояния залогинился пользователь или нет
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  //Открыть модалку успешной регистрации
-  function handleSuccessRegisterOpen() {
-    setIsRegisterOpen(false);
-    setIsSuccessRegisterOpen(true);
-  }
-
   //Открыть модалку авторизации
   function handleAuthorizationOpen() {
     setIsSuccessRegisterOpen(false);

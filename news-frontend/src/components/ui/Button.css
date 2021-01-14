@@ -1,3 +1,11 @@
+.button {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .button__main {
   cursor: pointer;
   width: 288px;
@@ -5,11 +13,23 @@
   border: 1px solid white;
   border-radius: 100px;
   background: white;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
   color: #1a1b22;
   align-self: center;
   margin-top: 64px;
+}
+
+.button__header {
+  color: inherit;
+  fill: inherit;
+
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 19px;
+  padding-right: 19px;
+  max-width: 176px;
+  border: 1px solid;
+  border-radius: 100px;
 }

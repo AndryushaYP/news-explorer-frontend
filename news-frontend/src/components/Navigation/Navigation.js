@@ -1,54 +1,35 @@
-import { NavLink, Route, Switch } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ loggedIn, onAuthorizeClick, logOut }) {
+function Navigation({ loggedIn }) {
   return (
     <nav className="navigation">
-      <NavLink
-        exact
-        to="/"
-        className="navigation__link navigation__link_type_main"
-        activeClassName="navigation__link_type_active"
-      >
-        Главная
-      </NavLink>
       {!loggedIn ? (
         <NavLink
+          exact
           to="/"
-          className="navigation__link navigation__link_type_authorize"
-          onClick={onAuthorizeClick}
+          className="navigation__link"
+          activeClassName="navigation__link_type_active"
         >
-          Авторизоваться
+          Главная
         </NavLink>
       ) : (
         <>
           <NavLink
+            exact
+            to="/"
+            className="navigation__link"
+            activeClassName="navigation__link_type_active"
+          >
+            Главная
+          </NavLink>
+          <NavLink
             to="/saved-news"
-            className="navigation__link navigation__link_type_save-articles"
+            className="navigation__link"
             activeClassName="navigation__link_type_active"
           >
             Сохраненные статьи
           </NavLink>
-          <Switch>
-            <Route exact path="/">
-              <NavLink
-                to="/"
-                className="navigation__link navigation__link_type_logout-main"
-                onClick={logOut}
-              >
-                Андрей
-              </NavLink>
-            </Route>
-            <Route path="/saved-news">
-              <NavLink
-                to="/"
-                className="navigation__link navigation__link_type_logout-saved-news"
-                onClick={logOut}
-              >
-                Андрей
-              </NavLink>
-            </Route>
-          </Switch>
         </>
       )}
     </nav>

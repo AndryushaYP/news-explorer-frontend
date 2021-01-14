@@ -19,6 +19,7 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
       changeModalValue="Войти"
       changeModal={changeModal}
       text="или "
+      errorValidation="Такой пользователь уже есть"
     >
       <Input
         labelValue="Email"
@@ -26,7 +27,6 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="email"
         name="email"
         className="popup__input"
-        errorText="Неправильный формат email"
       />
       <Input
         labelValue="Пароль"

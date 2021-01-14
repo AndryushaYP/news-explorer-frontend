@@ -12,6 +12,7 @@ function PopupWithForm({
   changeModal,
   modifier,
   text,
+  errorValidation,
 }) {
   return (
     <div className={`popup popup_type_${name} ${isOpen && "popup_opened"}`} onClick={onClose}>
@@ -26,11 +27,13 @@ function PopupWithForm({
         <h2 className="popup__title">{title}</h2>
 
         {children}
-
+        <span className="popup__button-error popup__button-error_visible" id="name-error">
+          {errorValidation}
+        </span>
         <button type="submit" value="" className={`popup__button ${modifier}`}>
           {btnValue}
         </button>
-        <p className="popup__change-modal" onClick={changeModal}>
+        <p className={`popup__change-modal popup__change-modal_type_${name}`} onClick={changeModal}>
           {text}
           <span
             style={{
