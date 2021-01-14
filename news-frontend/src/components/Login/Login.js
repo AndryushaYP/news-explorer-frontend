@@ -1,9 +1,8 @@
 import "./Login.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import Input from "../ui/Input";
 
-function Login({ onLogin, isOpen, onClose }) {
-  const handleChange = (e) => {};
-
+function Login({ onLogin, isOpen, onClose, changeModal }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin();
@@ -12,39 +11,30 @@ function Login({ onLogin, isOpen, onClose }) {
   return (
     <PopupWithForm
       onSubmit={handleSubmit}
-      name={"edit"}
+      name={"login"}
       title={"Вход"}
       btnValue={"Войти"}
       isOpen={isOpen}
       onClose={onClose}
+      changeModalValue="Зарегистрироваться"
+      changeModal={changeModal}
+      text="или "
     >
-      <label className="popup__label">
-        <input
-          onChange={handleChange}
-          placeholder="Введите почту"
-          type="email"
-          name="name"
-          className="popup__input popup__input_name"
-          minLength="2"
-          maxLength="40"
-          required
-        />
-        <span className="popup__error" id="name-error"></span>
-      </label>
-
-      <label className="popup__label">
-        <input
-          onChange={handleChange}
-          placeholder="Введите пароль"
-          type="password"
-          name="about"
-          minLength="2"
-          maxLength="200"
-          className="popup__input popup__input_profession"
-          required
-        />
-        <span className="popup__error" id="about-error"></span>
-      </label>
+      <Input
+        labelValue="Email"
+        placeholder="Введите почту"
+        type="email"
+        name="email"
+        className="popup__input"
+        errorText="Неправильный формат email"
+      />
+      <Input
+        labelValue="Пароль"
+        placeholder="Введите пароль"
+        type="password"
+        name="password"
+        className="popup__input"
+      />
     </PopupWithForm>
   );
 }

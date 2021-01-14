@@ -25,22 +25,24 @@
 }
 
 .popup__title {
+  margin: 0;
+  margin-bottom: 22px;
   padding: 0;
+  font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-size: 24px;
-  line-height: 1.2em;
+  line-height: 28px;
 }
 
 .popup__form {
-  margin: 0 auto;
-  padding: 0 36px 0;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 34px 36px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-start;
-  width: 430px;
-  min-height: 330px;
+  width: 358px;
+  height: 318px;
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
@@ -49,20 +51,33 @@
   cursor: default;
 }
 
+.popup__form_type_register {
+  height: 400px;
+}
+
+.popup__form_type_success-register {
+  height: 88px;
+  padding: 43px 36px 51px;
+}
+
 .popup__button {
   align-self: center;
   background: #2f71e5;
   border-radius: 100px;
   height: 64px;
   border: none;
-  padding: 20px 0;
   width: 360px;
-  margin: 0;
+  padding: 0;
+  margin: 9px 0 16px;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
   color: white;
+}
+
+.popup__button_type_hidden {
+  display: none;
 }
 
 .popup__button-close {
@@ -77,6 +92,16 @@
   right: -41px;
   top: -41px;
   transition: 0.7s ease;
+}
+
+.popup__change-modal {
+  align-self: center;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
 }
 
 .popup__button-close:hover {

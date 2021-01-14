@@ -12,19 +12,45 @@ import Preloader from "../Preloader/Preloader";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
 import arrCard from "../../utils/arrCard";
 import Login from "../Login/Login";
+import Register from "../Register/Register";
+import SuccessRegister from "../SuccessRegister/SuccessRegister";
 
 function App() {
   //Стейт для модалки Авторизации
   const [isLoginOpen, setIsLoginOpen] = React.useState(false);
 
   //Стейт для модалки регистрации
-  /* const [isRegisterOpen, setIsRegisterOpen] = React.useState(false); */
+  const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
+
+  //Стейт для модалки успешной регистрации
+
+  const [isSuccessRegisterOpen, setIsSuccessRegisterOpen] = React.useState(false);
 
   //Стейт для изменения состояния залогинился пользователь или нет
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  //Открыть модалку успешной регистрации
+  function handleSuccessRegisterOpen() {
+    setIsRegisterOpen(false);
+    setIsSuccessRegisterOpen(true);
+  }
+
+  //Открыть модалку авторизации
   function handleAuthorizationOpen() {
+    setIsSuccessRegisterOpen(false);
+    setIsRegisterOpen(false);
     setIsLoginOpen(true);
+  }
+  //Открыть модалку регистрации
+  function handleRegisterOpen() {
+    setIsLoginOpen(false);
+    setIsRegisterOpen(true);
+  }
+
+  //Регистрация
+  function handleRegister() {
+    setIsRegisterOpen(false);
+    setIsSuccessRegisterOpen(true);
   }
 
   // Войти
@@ -65,7 +91,23 @@ function App() {
           <SavedNews cards={arrCard} />
         </Route>
       </Switch>
-      <Login isOpen={isLoginOpen} onClose={closeAllPopup} onLogin={handleLogin} />
+      <Login
+        isOpen={isLoginOpen}
+        onClose={closeAllPopup}
+        onLogin={handleLogin}
+        changeModal={handleRegisterOpen}
+      />
+      <Register
+        isOpen={isRegisterOpen}
+        onClose={closeAllPopup}
+        onRegister={handleRegister}
+        changeModal={handleAuthorizationOpen}
+      />
+      <SuccessRegister
+        isOpen={isSuccessRegisterOpen}
+        onClose={closeAllPopup}
+        changeModal={handleAuthorizationOpen}
+      />
       <Footer />
     </div>
   );

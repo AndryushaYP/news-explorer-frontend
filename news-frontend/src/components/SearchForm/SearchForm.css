@@ -12,13 +12,14 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
-  color: #b6bcbf;
+  color: black;
   padding: 0;
+  padding-left: 0px;
   margin: 0;
-  width: 584px;
+  width: 580px;
   border-radius: 100px;
   height: 64px;
-  border: none;
+  border: white;
   padding-left: 24px;
 }
 
