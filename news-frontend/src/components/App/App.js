@@ -75,9 +75,10 @@ function App() {
             logOut={logOut}
           />
           <Main />
+          <NewsCardList />
           <Preloader />
           <ResultNotFound />
-          <NewsCardList />
+
           <About />
         </Route>
         <Route path="/saved-news">

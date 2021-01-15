@@ -23,3 +23,15 @@
 .navigation__link_type_active {
   border-bottom: solid 3px;
 }
+
+@media screen and (max-width: 1280px) {
+  .navigation {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .navigation__link {
+    font-size: 16px;
+    padding: 20px 0;
+  }
+}

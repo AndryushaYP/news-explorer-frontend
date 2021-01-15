@@ -63,6 +63,10 @@
     max-height: 66px;
   }
 
+  .header__main {
+    margin-bottom: 38px;
+  }
+
   .header__title {
     left: 40px;
   }
