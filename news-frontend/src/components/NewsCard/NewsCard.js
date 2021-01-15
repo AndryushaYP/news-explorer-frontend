@@ -21,7 +21,9 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
   return (
     <li className="card">
       <img src={img} alt={title} className="card__img"></img>
-
+      <a href={link} className="card__source">
+        {source}
+      </a>
       <Switch>
         <Route exact path="/">
           <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>
@@ -50,9 +52,6 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
         <p className="card__news-date">{date}</p>
         <h2 className="card__title">{title}</h2>
         <p className="card__text">{text}</p>
-        <a href={link} className="card__source">
-          {source}
-        </a>
       </div>
     </li>
   );

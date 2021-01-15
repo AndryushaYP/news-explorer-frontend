@@ -8,6 +8,7 @@
 }
 
 .cards__list {
+  max-width: 1232px;
   display: flex;
   max-width: 100%;
   flex-wrap: wrap;
@@ -25,4 +26,14 @@
   font-size: 40px;
   line-height: 46px;
   color: #1a1b22;
+}
+
+@media screen and (max-width: 1024px) {
+  .cards {
+    padding: 40px;
+  }
+
+  .cards__list {
+    gap: 8px;
+  }
 }

@@ -27,7 +27,7 @@ function NewsCardList() {
                       key={card.id}
                       img={card.img}
                       title={card.title}
-                      text={card.text.length > 150 ? card.text.slice(0, 150).concat("...") : card.text.slice(0, 150)}
+                      text={card.text}
                       link={card.link}
                       source={card.source}
                       date={card.date}
@@ -39,7 +39,7 @@ function NewsCardList() {
                     key={card.id}
                     img={card.img}
                     title={card.title}
-                    text={card.text.length > 150 ? card.text.slice(0, 150).concat("...") : card.text.slice(0, 150)}
+                    text={card.text}
                     link={card.link}
                     source={card.source}
                     date={card.date}
@@ -57,7 +57,7 @@ function NewsCardList() {
                 key={card.id}
                 img={card.img}
                 title={card.title}
-                text={card.text.length > 150 ? card.text.slice(0, 150).concat("...") : card.text.slice(0, 150)}
+                text={card.text}
                 link={card.link}
                 source={card.source}
                 date={card.date}
