@@ -7,6 +7,10 @@
   flex-shrink: 1;
 }
 
+.cards_type_saved-news {
+  padding: 62px 104px;
+}
+
 .cards__list {
   max-width: 1232px;
   display: flex;
@@ -31,6 +35,10 @@
 @media screen and (max-width: 1024px) {
   .cards {
     padding: 40px;
+  }
+
+  .cards_type_saved-news {
+    padding: 27px 40px;
   }
 
   .cards__title {

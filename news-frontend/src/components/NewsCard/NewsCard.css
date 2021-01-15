@@ -166,4 +166,14 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  .card__keyword {
+    left: 8px;
+    top: 8px;
+  }
+
+  .card__btn {
+    right: 8px;
+    top: 8px;
+  }
 }

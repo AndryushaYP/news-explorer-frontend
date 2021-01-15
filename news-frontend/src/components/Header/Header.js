@@ -8,7 +8,9 @@ import Navigation from "../Navigation/Navigation";
 function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut }) {
   return (
     <div className={headerClassName}>
-      <h1 className="header__title">NewsExplorer</h1>
+      <Link className="header__title" to="/">
+        NewsExplorer
+      </Link>
       <Navigation onAuthorizeClick={onAuthorizeClick} loggedIn={loggedIn} logOut={logOut} />
       {!loggedIn ? (
         <Button

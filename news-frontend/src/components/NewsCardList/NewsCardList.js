@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-function NewsCardList() {
+function NewsCardList({ cardsClassName }) {
   const [buttonClick, setButtonClick] = React.useState(false);
 
   const handleButton = () => {
@@ -13,7 +13,7 @@ function NewsCardList() {
     setButtonClick(true);
   };
   return (
-    <section className="cards">
+    <section className={`cards ${cardsClassName}`}>
       <Switch>
         <Route exact path="/">
           <h1 className="cards__title">Результаты поиска</h1>

@@ -20,6 +20,8 @@
 }
 
 .header__title {
+  text-decoration: none;
+  color: inherit;
   position: absolute;
   left: 104px;
   margin: 0;
