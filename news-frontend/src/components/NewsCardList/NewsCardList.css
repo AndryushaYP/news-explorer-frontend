@@ -33,6 +33,10 @@
     padding: 40px;
   }
 
+  .cards__title {
+    margin-bottom: 32px;
+  }
+
   .cards__list {
     gap: 8px;
   }

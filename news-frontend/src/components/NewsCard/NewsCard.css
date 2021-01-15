@@ -4,7 +4,7 @@
   position: relative;
   list-style: none;
   max-width: calc((100% - 32px) / 3);
-  height: auto;
+  min-height: 576px;
   background: white;
   border-radius: 15px;
   overflow: hidden;
@@ -15,7 +15,6 @@
 }
 
 .card__info {
-  min-height: 300px;
   box-sizing: border-box;
   gap: 12px;
   padding: 24px;
@@ -142,11 +141,12 @@
 @media screen and (max-width: 768px) {
   .card {
     max-width: 224px;
-    height: 420px;
+    min-height: 420px;
   }
 
   .card__info {
     padding: 16px;
+    max-height: 280px;
   }
 
   .card__source {
