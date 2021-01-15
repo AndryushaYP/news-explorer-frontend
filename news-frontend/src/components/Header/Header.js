@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, NavLink } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import Button from "../ui/Button";
 
 import "./Header.css";
@@ -19,22 +19,18 @@ function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut }) {
       ) : (
         <Switch>
           <Route exact path="/">
-            <NavLink
-              to="/"
-              className="header__link header__link_type_logout-main"
-              onClick={logOut}
-            >
+            <Link to="/" className="header__link header__link_type_logout-main" onClick={logOut}>
               Андрей
-            </NavLink>
+            </Link>
           </Route>
           <Route path="/saved-news">
-            <NavLink
+            <Link
               to="/"
               className="header__link header__link_type_logout-saved-news"
               onClick={logOut}
             >
               Андрей
-            </NavLink>
+            </Link>
           </Route>
         </Switch>
       )}

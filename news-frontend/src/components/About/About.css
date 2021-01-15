@@ -1,11 +1,12 @@
 .about {
   display: flex;
   padding: 80px 104px;
-  padding-right: 216px;
   gap: 56px;
 }
 
 .about__img {
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .about__info {
@@ -22,6 +23,7 @@
 
 .about__description {
   margin: 0;
+  max-width: 604px;
   padding-top: 24px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;

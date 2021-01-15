@@ -1,5 +1,6 @@
 .header {
   padding: 0 104px;
+  max-height: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -38,29 +39,45 @@
   font-weight: 500;
   cursor: pointer;
   margin: 0;
-  padding: 0;
+  padding: 12px 19px;
+  padding-right: 50px;
 }
 
 .header__link_type_logout-main {
   background: url("../../images/logout.svg") no-repeat;
   background-position: center right 19px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 19px;
-  padding-right: 19px;
-  width: 90px;
   border: 1px solid;
   border-radius: 100px;
 }
 
 .header__link_type_logout-saved-news {
-  background: url("../../images/logout-black.svg") no-repeat;
   background-position: center right 19px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 19px;
-  padding-right: 19px;
-  width: 90px;
-  border: 1px solid;
+  background: url("../../images/logout-black.svg") no-repeat;
+  border: 1px solid #d1d2d6;
   border-radius: 100px;
+}
+
+@media screen and (max-width: 1280px) {
+  .header {
+    padding: 0 40px;
+    max-height: 66px;
+  }
+
+  .header__title {
+    left: 40px;
+  }
+
+  .header__link {
+    font-size: 16px;
+    padding: 8px 12px;
+    padding-right: 40px;
+  }
+
+  .header__link_type_logout-saved-news {
+    background-position: center right 12px;
+  }
+
+  .header__link_type_logout-main {
+    background-position: center right 12px;
+  }
 }

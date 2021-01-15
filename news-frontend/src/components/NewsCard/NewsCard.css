@@ -1,25 +1,26 @@
 .card {
+  display: flex;
+  flex-direction: column;
   position: relative;
   list-style: none;
-  width: 400px;
-  height: 576px;
+  max-width: 400px;
+  max-height: 576px;
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  
 }
 
 .card__img {
-  width: 400px;
-  height: 272px;
+  max-width: 400px;
+  max-height: 272px;
   object-fit: cover;
 }
 
 .card__info {
   position: relative;
   box-sizing: border-box;
-  height: 304px;
+  min-height: 304px;
   padding: 24px;
   display: flex;
   flex-direction: column;

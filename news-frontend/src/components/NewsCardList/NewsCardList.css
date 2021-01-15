@@ -1,9 +1,20 @@
 .cards {
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background: #f5f6f7;
   padding: 62px 104px;
+  flex-shrink: 1;
+}
+
+.cards__list {
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0;
+  text-decoration: none;
+  gap: 16px;
 }
 
 .cards__title {
@@ -14,13 +25,4 @@
   font-size: 40px;
   line-height: 46px;
   color: #1a1b22;
-}
-
-.cards__list {
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
 }

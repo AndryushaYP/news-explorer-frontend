@@ -1,6 +1,7 @@
 .preloader {
-  display: block;
-  padding: 100px 683px;
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
   background: #f5f6f7;
 }
 

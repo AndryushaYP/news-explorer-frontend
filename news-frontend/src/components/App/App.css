@@ -1,10 +1,7 @@
 .App {
-  width: 1440px;
+  max-width: 1440px;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  background: url('../../images/main-background.jpg') no-repeat;
-  min-height: 576px;
-  margin: auto;
+  background: url("../../images/main-background.jpg") no-repeat;
 }
-
-

@@ -20,6 +20,7 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
       changeModal={changeModal}
       text="или "
       errorValidation="Такой пользователь уже есть"
+      modifier="popup__button_type_disable"
     >
       <Input
         labelValue="Email"
