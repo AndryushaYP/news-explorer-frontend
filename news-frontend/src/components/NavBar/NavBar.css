@@ -1,0 +1,17 @@
+.navigation__mobile {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  width: 288px;
+  max-height: 112px;
+  background: #1a1b22;
+  color: white;
+}
+
+.navigation__mobile-link {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 56px;
+}
