@@ -35,7 +35,6 @@
   border-radius: 100px;
 }
 
-
 @media screen and (max-width: 1280px) {
   .button__header {
     font-size: 16px;
@@ -45,6 +44,20 @@
   .button__main {
     margin-top: 32px;
     width: 240px;
+    padding: 15px 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .button__header {
+    display: none;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .button__main {
+    margin-top: 15px;
+    width: 288px;
     padding: 15px 0;
   }
 }

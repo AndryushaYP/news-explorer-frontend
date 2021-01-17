@@ -26,8 +26,6 @@
 }
 
 @media screen and (max-width: 1280px) {
-  .main {
-  }
 
   .main__title {
     max-width: 385px;
@@ -39,5 +37,20 @@
     max-width: 452px;
     padding-top: 16px;
     padding-bottom: 48px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .main__title {
+    max-width: 285px;
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .main__description {
+    max-width: 288px;
+    padding-top: 16px;
+    padding-bottom: 122px;
   }
 }

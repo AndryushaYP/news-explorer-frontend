@@ -5,6 +5,7 @@
   padding: 24px 104px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
+  gap: 40px;
 }
 
 .footer__copyright {
@@ -25,6 +26,16 @@
   color: #1a1b22;
 }
 
+.footer__navigation-column-link {
+  display: flex;
+  gap: 40px;
+}
+
+.footer__social-link {
+  display: flex;
+  gap: 28px;
+}
+
 .footer__link {
   text-decoration: none;
   color: black;
@@ -38,5 +49,26 @@
   }
   .footer__navigation {
     gap: 25px;
+  }
+
+  .footer__navigation-column-link {
+    gap: 25px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer {
+    flex-direction: column-reverse;
+    padding: 20px 16px;
+  }
+
+  .footer__navigation {
+    justify-content: space-between;
+  }
+
+  .footer__navigation-column-link {
+    flex-direction: column;
+    min-height: 74px;
+    justify-content: space-between;
   }
 }

@@ -67,3 +67,26 @@
     height: 56px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .search-form {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 288px;
+    margin-bottom: 48px;
+    height: 128px;
+    margin-bottom: 32px;
+  }
+
+  .search-form__input {
+    width: 260px;
+    padding: 0 16px;
+    margin-bottom: 16px;;
+  }
+  .search-form__btn {
+    position: relative;
+    width: 288px;
+  }
+}

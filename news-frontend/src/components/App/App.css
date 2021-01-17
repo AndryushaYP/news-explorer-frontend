@@ -12,3 +12,10 @@
     background: url("../../images/main-background-768.png") no-repeat;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .App {
+    background-size: 320px 536px;
+    background: url("../../images/main-background-320.png") no-repeat;
+  }
+}
