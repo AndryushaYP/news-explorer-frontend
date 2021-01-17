@@ -33,22 +33,32 @@
 
 .header__menu {
   display: none;
-  padding: 0 30px;
+  padding: 0 20px;
   width: 24px;
   height: 24px;
   background: url(../../images/menu.svg) no-repeat center;
   border: none;
   cursor: pointer;
+  transition: 0.6s ease;
+}
+
+.header__menu:hover {
+  opacity: 0.6;
 }
 
 .header__menu-black {
   display: none;
-  padding: 0 30px;
+  padding: 0 20px;
   width: 24px;
   height: 24px;
   background: url(../../images/menu-black.svg) no-repeat center;
   border: none;
   cursor: pointer;
+  transition: 0.6s ease;
+}
+
+.header__menu-black:hover {
+  opacity: 0.6;
 }
 
 .header__link {
