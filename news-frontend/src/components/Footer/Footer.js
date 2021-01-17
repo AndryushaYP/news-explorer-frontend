@@ -12,16 +12,16 @@ function Footer() {
           <Link className="footer__link" to="/">
             Главная
           </Link>
-          <a href="https://yandex.ru" className="footer__link">
+          <a href="https://praktikum.yandex.ru/" target="_blank" className="footer__link">
             Яндекс.Практикум
           </a>
         </div>
 
         <div className="footer__social-link">
-          <a href="https://github.com" className="footer__link">
+          <a href="https://github.com" target="_blank" className="footer__link">
             <img className="footer__link-icon" alt="Иконка Гитхаба" src={githubIcon} />
           </a>
-          <a href="https://facebook.com" className="footer__link">
+          <a href="https://facebook.com" target="_blank" className="footer__link">
             <img className="footer__link-icon" alt="Иконка Гитхаба" src={faceBookIcon} />
           </a>
         </div>

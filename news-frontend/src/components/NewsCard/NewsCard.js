@@ -21,7 +21,7 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
   return (
     <li className="card">
       <img src={img} alt={title} className="card__img"></img>
-      <a href={link} className="card__source">
+      <a href={link} target="_blank" className="card__source">
         {source}
       </a>
       <Switch>
