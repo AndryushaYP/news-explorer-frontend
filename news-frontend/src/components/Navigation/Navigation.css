@@ -43,16 +43,21 @@
 
 @media screen and (max-width: 320px) {
   .navigation {
+    display: none;
     padding: 0;
     gap: 0;
-    display: none;
     flex-direction: column;
     align-items: flex-start;
-    width: 288px;
+    width: 320px;
+    border-top: 1px solid rgba(209, 210, 214, 0.4);
     max-height: 112px;
     background: #1a1b22;
     color: white;
-    margin-top: 16px;
+    padding: 16px 0;
+  }
+
+  .navigation_type_visible {
+    display: flex;
   }
 
   .navigation__link_type_active {
@@ -65,5 +70,6 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 56px;
+    margin-left: 16px;
   }
 }

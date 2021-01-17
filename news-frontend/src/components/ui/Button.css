@@ -39,6 +39,7 @@
   .button__header {
     font-size: 16px;
     padding: 8px 12px;
+    background: inherit;
   }
 
   .button__main {
@@ -50,9 +51,16 @@
 
 @media screen and (max-width: 320px) {
   .button__header {
-    display: none;
+    min-width: 288px;
     font-size: 16px;
-    padding: 8px 12px;
+    padding: 15px 12px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .button__header_type_visible {
+    display: block;
   }
 
   .button__main {
