@@ -62,6 +62,8 @@ function App() {
   function closeAllPopup(e) {
     if (e.target === e.currentTarget || e.key === "Escape") {
       setIsLoginOpen(false);
+      setIsSuccessRegisterOpen(false);
+      setIsRegisterOpen(false);
     }
   }
   return (
@@ -73,6 +75,7 @@ function App() {
             headerClassName="header header__main"
             loggedIn={loggedIn}
             logOut={logOut}
+            onClose={closeAllPopup}
           />
           <Main />
           <NewsCardList />
@@ -82,7 +85,12 @@ function App() {
           <About />
         </Route>
         <Route path="/saved-news">
-          <Header headerClassName="header header__saved-news" loggedIn={loggedIn} logOut={logOut} />
+          <Header
+            headerClassName="header header__saved-news"
+            loggedIn={loggedIn}
+            logOut={logOut}
+            onClose={closeAllPopup}
+          />
           <SavedNews cards={arrCard} />
         </Route>
       </Switch>

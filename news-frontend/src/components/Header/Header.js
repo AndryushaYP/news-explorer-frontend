@@ -5,14 +5,15 @@ import Button from "../ui/Button";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut }) {
+function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose }) {
   const [isOpenMenu, setIsOpenMenu] = React.useState(false);
 
-  const handleMenu = () => {
+  const handleMenu = (e) => {
     if (!isOpenMenu) {
       return setIsOpenMenu(true);
     }
     setIsOpenMenu(false);
+    onClose(e);
   };
 
   return (
