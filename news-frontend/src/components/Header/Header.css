@@ -118,7 +118,17 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 480px) {
+  .header {
+    padding: 0 16px;
+  }
+
+  .header__title {
+    left: 16px;
+  }
+} */
+
+@media screen and (max-width: 600px) {
   .header {
     padding: 0;
     height: 56px;

@@ -148,6 +148,11 @@
   color: red;
 }
 
+@media screen and (max-width: 540px) {
+  .popup__button-close {
+    right: -10px;
+  }
+}
 @media screen and (max-width: 320px) {
   .popup {
     margin-top: 56px;
