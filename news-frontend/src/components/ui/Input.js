@@ -24,7 +24,7 @@ function Input({
         maxLength={maxLength}
         required
       />
-      <span className="popup__error popup__error_visible" id="name-error">
+      <span className="popup__error popup__error_visible" id={`${name}-error`}>
         {errorText}
       </span>
     </label>

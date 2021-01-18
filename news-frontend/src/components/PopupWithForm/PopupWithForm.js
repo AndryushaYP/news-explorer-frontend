@@ -27,7 +27,7 @@ function PopupWithForm({
         <h2 className="popup__title">{title}</h2>
 
         {children}
-        <span className="popup__button-error popup__button-error_visible" id="name-error">
+        <span className="popup__button-error popup__button-error_visible">
           {errorValidation}
         </span>
         <button type="submit" value="" className={`popup__button ${modifier}`}>

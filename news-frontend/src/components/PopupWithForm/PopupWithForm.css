@@ -149,8 +149,15 @@
 }
 
 @media screen and (max-width: 540px) {
+  .popup__form {
+    width: 246px;
+  }
   .popup__button-close {
     right: -10px;
+  }
+
+  .popup__button {
+    width: 246px;
   }
 }
 @media screen and (max-width: 320px) {

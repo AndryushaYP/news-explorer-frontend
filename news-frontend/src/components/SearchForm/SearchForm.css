@@ -70,6 +70,24 @@
 
 @media screen and (max-width: 480px) {
   .search-form {
+    max-width: 288px;
+    margin-bottom: 48px;
+    height: 56px;
+    margin-bottom: 32px;
+  }
+
+  .search-form__input {
+    width: 260px;
+    padding: 0 10px;
+    margin-bottom: 16px;
+  }
+  .search-form__btn {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search-form {
     overflow: visible;
     display: flex;
     flex-direction: column;
@@ -83,7 +101,7 @@
   .search-form__input {
     width: 260px;
     padding: 0 16px;
-    margin-bottom: 16px;;
+    margin-bottom: 16px;
   }
   .search-form__btn {
     position: relative;
