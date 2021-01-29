@@ -1,0 +1,21 @@
+.App {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background: url("../../images/main-background.jpg") no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    background-size: 768px 400px;
+    background: url("../../images/main-background-768.png") no-repeat;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .App {
+    background-size: 320px 536px;
+    background: url("../../images/main-background-320.png") no-repeat;
+  }
+}
