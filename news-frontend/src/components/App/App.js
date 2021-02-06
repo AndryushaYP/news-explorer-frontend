@@ -14,6 +14,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import SuccessRegister from "../SuccessRegister/SuccessRegister";
 import * as newsApi from "../../utils/NewsApi";
+import * as mainApi from "../../utils/MainApi";
 
 function App() {
   //Стейт для модалки Авторизации
@@ -52,7 +53,7 @@ function App() {
   }
 
   //Поиск статей
-  function searhcArticles (searchWord) {
+  function searhcArticles(searchWord) {
     newsApi.getNews(searchWord).then((data) => {
       setNewsArr([
         ...data.articles.map((item, id) => {
@@ -71,6 +72,10 @@ function App() {
       }
     });
   };
+
+  //Проверка
+
+  console.log(mainApi.getArticles());
 
   // Войти
   function handleLogin() {
@@ -101,7 +106,7 @@ function App() {
             logOut={logOut}
             onClose={closeAllPopup}
           />
-          <Main searchBtnClick={searhcArticles}/>
+          <Main searchBtnClick={searhcArticles} />
           <NewsCardList cards={newsArr} clickBtn={handleClick} />
           <Preloader />
           <ResultNotFound />
