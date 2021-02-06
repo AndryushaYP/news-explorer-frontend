@@ -55,15 +55,30 @@ function App() {
       .register(email, password, name)
       .then((data) => {
         if (data.email) {
-          setCurrentUser(data);
-          setIsSuccessRegisterOpen(true);
+          setCurrentUser(data); //Если пришёл ответ, то обновляем данные
+          setIsSuccessRegisterOpen(true); // и открываем модалку успешной регистрации
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(currentUser);
+  //Авторизация
+  const handleLogin = (email, password) => {
+    mainApi
+      .login(email, password)
+      .then((data) => {
+        if (data.token) {
+          //Если в ответе сервера есть токен
+          localStorage.setItem("jwt", data.token); // то сохраняем его в локальном хранилище
+          setLoggedIn(true); // и меняем состояние на "авторизован"
+          setIsLoginOpen(false); //закрываем модалку авторизации
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   //Поиск статей
   function searhcArticles(searchWord) {
@@ -85,11 +100,6 @@ function App() {
       }
     });
   };
-  // Войти
-  function handleLogin() {
-    setLoggedIn(true);
-    setIsLoginOpen(false);
-  }
 
   // Выйти
   function logOut() {
