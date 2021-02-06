@@ -26,6 +26,8 @@ function App() {
 
   // Если по запросу ничего не найдено
   const [searchNotFound, setSearchNotFound] = React.useState(false);
+  // Стэйт для Preloader
+  const [isLoading, setIsLoading] = React.useState(false);
   const [dataUser, setDataUser] = React.useState({ email: "", name: "" });
   //Стейт для изменения состояния залогинился пользователь или нет
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -126,21 +128,30 @@ function App() {
 
   //Поиск статей
   function searhcArticles(searchWord) {
-    newsApi.getNews(searchWord).then((data) => {
-      if (data.articles.length > 0) {
-        setSearchNotFound(false);
-        setNewsArr([
-          ...data.articles.map((item, id) => {
-            item.id = id;
-            item.keyword = searchWord;
-            return item;
-          }),
-        ]);
-      } else {
-        setSearchNotFound(true);
-        setNewsArr([]);
-      }
-    });
+    setNewsArr([]);
+    setIsLoading(true);
+    newsApi
+      .getNews(searchWord)
+      .then((data) => {
+        if (data.articles.length > 0) {
+          setSearchNotFound(false);
+          setNewsArr([
+            ...data.articles.map((item, id) => {
+              item.id = id;
+              item.keyword = searchWord;
+              return item;
+            }),
+          ]);
+        } else {
+          setSearchNotFound(true);
+          setNewsArr([]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      }).finally(() => {
+        setIsLoading(false);
+      });
   }
 
   // Сохраняем статью
@@ -190,7 +201,7 @@ function App() {
             />
             <Main searchBtnClick={searhcArticles} />
             <NewsCardList cards={newsArr} clickBtn={handleSaveArticle} />
-            <Preloader />
+            {isLoading && <Preloader />}
             {searchNotFound && <ResultNotFound />}
 
             <About />
