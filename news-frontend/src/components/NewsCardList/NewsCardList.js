@@ -1,49 +1,53 @@
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
-import arrCard from "../../utils/arrCard";
 import Button from "../ui/Button";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-function NewsCardList({ cardsClassName }) {
+function NewsCardList({ cardsClassName, cards, clickBtn }) {
   const [buttonClick, setButtonClick] = React.useState(false);
 
   const handleButton = () => {
     console.log("меня нажали!");
     setButtonClick(true);
   };
+
   return (
-    <section className={`cards ${cardsClassName}`}>
+    <section className={cards.length > 0 ? `cards ${cardsClassName}` : "cards cards__invisible"}>
       <Switch>
         <Route exact path="/">
           <h1 className="cards__title">Результаты поиска</h1>
 
           <ul className="cards__list">
             {!buttonClick
-              ? arrCard
+              ? cards
                   .slice(0, 3)
-                  .map((card) => (
+                  .map((card, i) => (
                     <NewsCard
-                      key={card.id}
-                      img={card.img}
+                      clickBtn={clickBtn}
+                      key={i}
+                      img={card.urlToImage}
                       title={card.title}
-                      text={card.text}
-                      link={card.link}
-                      source={card.source}
-                      date={card.date}
-                      keyword={card.keyword}
+                      text={card.description}
+                      link={card.url}
+                      source={card.source.name}
+                      date={card.publishedAt}
+                      keyword={card.source.name}
+                      id={card.id}
                     />
                   ))
-              : arrCard.map((card) => (
+              : cards.map((card, i) => (
                   <NewsCard
-                    key={card.id}
-                    img={card.img}
+                    clickBtn={clickBtn}
+                    key={i}
+                    img={card.urlToImage}
                     title={card.title}
-                    text={card.text}
-                    link={card.link}
-                    source={card.source}
-                    date={card.date}
-                    keyword={card.keyword}
+                    text={card.description}
+                    link={card.url}
+                    source={card.source.name}
+                    date={card.publishedAt}
+                    keyword={card.source.name}
+                    id={card.id}
                   />
                 ))}
           </ul>
@@ -52,16 +56,18 @@ function NewsCardList({ cardsClassName }) {
 
         <Route path="/saved-news">
           <ul className="cards__list">
-            {arrCard.map((card) => (
+            {cards.map((card, i) => (
               <NewsCard
-                key={card.id}
-                img={card.img}
+                clickBtn={clickBtn}
+                key={i}
+                id={card.id}
+                img={card.urlToImage}
                 title={card.title}
-                text={card.text}
-                link={card.link}
-                source={card.source}
-                date={card.date}
-                keyword={card.keyword}
+                text={card.description}
+                link={card.url}
+                source={card.source.name}
+                date={card.publishedAt}
+                keyword={card.source.name}
               />
             ))}
           </ul>

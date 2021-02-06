@@ -10,10 +10,10 @@ import NewsCardList from "../NewsCardList/NewsCardList";
 import SavedNews from "../SavedNews/SavedNews";
 import Preloader from "../Preloader/Preloader";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
-import arrCard from "../../utils/arrCard";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import SuccessRegister from "../SuccessRegister/SuccessRegister";
+import * as newsApi from "../../utils/NewsApi";
 
 function App() {
   //Стейт для модалки Авторизации
@@ -29,6 +29,11 @@ function App() {
   //Стейт для изменения состояния залогинился пользователь или нет
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  const [newsArr, setNewsArr] = React.useState([]);
+
+  //Массив ID сохраненных статей
+  const [savedArticles, setSavedArticles] = React.useState([]);
+
   //Открыть модалку авторизации
   function handleAuthorizationOpen() {
     setIsSuccessRegisterOpen(false);
@@ -40,12 +45,32 @@ function App() {
     setIsLoginOpen(false);
     setIsRegisterOpen(true);
   }
-
   //Регистрация
   function handleRegister() {
     setIsRegisterOpen(false);
     setIsSuccessRegisterOpen(true);
   }
+
+  //Поиск статей
+  function searhcArticles (searchWord) {
+    newsApi.getNews(searchWord).then((data) => {
+      setNewsArr([
+        ...data.articles.map((item, id) => {
+          item.id = id;
+          return item;
+        }),
+      ]);
+    });
+  }
+
+  const handleClick = (cardId) => {
+    // eslint-disable-next-line array-callback-return
+    newsArr.map((item) => {
+      if (item.id === cardId) {
+        setSavedArticles([...savedArticles, item]);
+      }
+    });
+  };
 
   // Войти
   function handleLogin() {
@@ -58,7 +83,6 @@ function App() {
     setLoggedIn(false);
   }
 
-  console.log(loggedIn);
   function closeAllPopup(e) {
     if (e.target === e.currentTarget || e.key === "Escape") {
       setIsLoginOpen(false);
@@ -77,8 +101,8 @@ function App() {
             logOut={logOut}
             onClose={closeAllPopup}
           />
-          <Main />
-          <NewsCardList />
+          <Main searchBtnClick={searhcArticles}/>
+          <NewsCardList cards={newsArr} clickBtn={handleClick} />
           <Preloader />
           <ResultNotFound />
 
@@ -91,7 +115,7 @@ function App() {
             logOut={logOut}
             onClose={closeAllPopup}
           />
-          <SavedNews cards={arrCard} />
+          <SavedNews cards={savedArticles} />
         </Route>
       </Switch>
       <Login

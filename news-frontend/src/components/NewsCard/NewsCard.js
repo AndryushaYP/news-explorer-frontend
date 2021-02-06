@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-no-target-blank */
 import "./NewsCard.css";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-function NewsCard({ img, title, text, link, source, date, keyword }) {
+function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn}) {
   const [spanClassName, setSpanClassName] = React.useState("card__span");
 
   const handleMouseEnter = (e) => {
@@ -12,10 +13,10 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
   const handleMouseLeave = (e) => {
     setSpanClassName("card__span");
   };
-
   const onHandleClick = (e) => {
     e.target.classList.remove("card__btn_type_save");
     e.target.classList.add("card__btn_type_save-active");
+    clickBtn(id);
   };
 
   return (
@@ -29,7 +30,6 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
           <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>
           <button
             className="card__btn card__btn_type_save"
-            type="submit"
             onClick={onHandleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

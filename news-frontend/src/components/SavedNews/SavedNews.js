@@ -7,7 +7,7 @@ function SavedNews({ cards }) {
   return (
     <>
       <SavedNewsHeader cards={cards} />
-      <NewsCardList cardsClassName="cards_type_saved-news" />
+      <NewsCardList cardsClassName="cards_type_saved-news" cards={cards} />
     </>
   );
 }

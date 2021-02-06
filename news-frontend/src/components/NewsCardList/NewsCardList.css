@@ -7,6 +7,10 @@
   flex-shrink: 1;
 }
 
+.cards__invisible {
+  display: none;
+}
+
 .cards_type_saved-news {
   padding: 62px 104px;
 }
