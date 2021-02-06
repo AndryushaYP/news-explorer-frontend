@@ -1,11 +1,23 @@
+import React from "react";
 import "./Register.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../ui/Input";
 
 function Register({ onRegister, isOpen, onClose, changeModal }) {
+  const [data, setData] = React.useState({ email: "", password: "", name: "" });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister();
+    const { password, email, name } = data;
+    onRegister(password, email, name);
   };
 
   return (
@@ -28,6 +40,7 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="email"
         name="email"
         className="popup__input"
+        onChange={handleChange}
       />
       <Input
         labelValue="Пароль"
@@ -35,6 +48,7 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="password"
         name="password"
         className="popup__input"
+        onChange={handleChange}
       />
 
       <Input
@@ -43,6 +57,7 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="name"
         name="name"
         className="popup__input"
+        onChange={handleChange}
       />
     </PopupWithForm>
   );

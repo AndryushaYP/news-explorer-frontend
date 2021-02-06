@@ -79,14 +79,14 @@ export const login = (password, email) => {
 };
 
 //Регистрация
-export const register = (password, email) => {
+export const register = (password, email, name) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ password: password, email: email }),
+    body: JSON.stringify({ password: password, email: email, name: name }),
   }).then((res) => {
     if (res.ok) {
       return res.json();

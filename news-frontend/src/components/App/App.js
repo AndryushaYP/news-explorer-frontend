@@ -13,10 +13,16 @@ import ResultNotFound from "../ResultNotFound/ResultNotFound";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import SuccessRegister from "../SuccessRegister/SuccessRegister";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as newsApi from "../../utils/NewsApi";
 import * as mainApi from "../../utils/MainApi";
 
 function App() {
+  //Контекст
+  const [currentUser, setCurrentUser] = React.useState({});
+  //Стейт для изменения состояния залогинился пользователь или нет
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
   //Стейт для модалки Авторизации
   const [isLoginOpen, setIsLoginOpen] = React.useState(false);
 
@@ -26,10 +32,7 @@ function App() {
   //Стейт для модалки успешной регистрации
 
   const [isSuccessRegisterOpen, setIsSuccessRegisterOpen] = React.useState(false);
-
-  //Стейт для изменения состояния залогинился пользователь или нет
-  const [loggedIn, setLoggedIn] = React.useState(false);
-
+  //массив статей
   const [newsArr, setNewsArr] = React.useState([]);
 
   //Массив ID сохраненных статей
@@ -47,10 +50,20 @@ function App() {
     setIsRegisterOpen(true);
   }
   //Регистрация
-  function handleRegister() {
-    setIsRegisterOpen(false);
-    setIsSuccessRegisterOpen(true);
-  }
+  const handleRegister = (email, password, name) => {
+    mainApi
+      .register(email, password, name)
+      .then((data) => {
+        if (data.email) {
+          setCurrentUser(data);
+          setIsSuccessRegisterOpen(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  console.log(currentUser);
 
   //Поиск статей
   function searhcArticles(searchWord) {
@@ -72,11 +85,6 @@ function App() {
       }
     });
   };
-
-  //Проверка
-
-  console.log(mainApi.getArticles());
-
   // Войти
   function handleLogin() {
     setLoggedIn(true);
@@ -98,48 +106,54 @@ function App() {
   return (
     <div className="App" onKeyDown={closeAllPopup}>
       <Switch>
-        <Route exact path="/">
-          <Header
-            onAuthorizeClick={handleAuthorizationOpen}
-            headerClassName="header header__main"
-            loggedIn={loggedIn}
-            logOut={logOut}
-            onClose={closeAllPopup}
-          />
-          <Main searchBtnClick={searhcArticles} />
-          <NewsCardList cards={newsArr} clickBtn={handleClick} />
-          <Preloader />
-          <ResultNotFound />
+        <CurrentUserContext.Provider value={currentUser}>
+          <Route exact path="/">
+            <Header
+              onAuthorizeClick={handleAuthorizationOpen}
+              headerClassName="header header__main"
+              loggedIn={loggedIn}
+              logOut={logOut}
+              onClose={closeAllPopup}
+            />
+            <Main searchBtnClick={searhcArticles} />
+            <NewsCardList cards={newsArr} clickBtn={handleClick} />
+            <Preloader />
+            <ResultNotFound />
 
-          <About />
-        </Route>
-        <Route path="/saved-news">
-          <Header
-            headerClassName="header header__saved-news"
-            loggedIn={loggedIn}
-            logOut={logOut}
+            <About />
+          </Route>
+          <Route path="/saved-news">
+            <Header
+              headerClassName="header header__saved-news"
+              loggedIn={loggedIn}
+              logOut={logOut}
+              onClose={closeAllPopup}
+            />
+            <SavedNews cards={savedArticles} />
+          </Route>
+
+          <Login
+            isOpen={isLoginOpen}
             onClose={closeAllPopup}
+            onLogin={handleLogin}
+            changeModal={handleRegisterOpen}
           />
-          <SavedNews cards={savedArticles} />
-        </Route>
+
+          <Register
+            isOpen={isRegisterOpen}
+            onClose={closeAllPopup}
+            onRegister={handleRegister}
+            changeModal={handleAuthorizationOpen}
+          />
+
+          <SuccessRegister
+            isOpen={isSuccessRegisterOpen}
+            onClose={closeAllPopup}
+            changeModal={handleAuthorizationOpen}
+          />
+        </CurrentUserContext.Provider>
       </Switch>
-      <Login
-        isOpen={isLoginOpen}
-        onClose={closeAllPopup}
-        onLogin={handleLogin}
-        changeModal={handleRegisterOpen}
-      />
-      <Register
-        isOpen={isRegisterOpen}
-        onClose={closeAllPopup}
-        onRegister={handleRegister}
-        changeModal={handleAuthorizationOpen}
-      />
-      <SuccessRegister
-        isOpen={isSuccessRegisterOpen}
-        onClose={closeAllPopup}
-        changeModal={handleAuthorizationOpen}
-      />
+
       <Footer />
     </div>
   );
