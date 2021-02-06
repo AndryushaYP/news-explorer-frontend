@@ -5,7 +5,7 @@ import Button from "../ui/Button";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose }) {
+function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose, name }) {
   const [isOpenMenu, setIsOpenMenu] = React.useState(false);
 
   const handleMenu = (e) => {
@@ -68,7 +68,7 @@ function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose }
                 }
                 onClick={logOut}
               >
-                Андрей
+                {name}
               </Link>
             </Route>
             <Route path="/saved-news">
@@ -81,7 +81,7 @@ function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose }
                 }
                 onClick={logOut}
               >
-                Андрей
+                {name}
               </Link>
             </Route>
           </Switch>

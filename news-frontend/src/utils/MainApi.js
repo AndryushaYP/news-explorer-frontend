@@ -96,6 +96,23 @@ export const register = (password, email, name) => {
   });
 };
 
+export const getContent = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Authorization" : `Bearer ${token}`
+    }
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Ошибка: ${res.status}`);
+  });
+}
+
 //Данные текущего пользователя
 export const getUserMe = () => {
   return fetch(`${BASE_URL}/users/me`, {

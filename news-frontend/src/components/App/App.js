@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -20,6 +20,10 @@ import * as mainApi from "../../utils/MainApi";
 function App() {
   //Контекст
   const [currentUser, setCurrentUser] = React.useState({});
+
+  const history = useHistory();
+  //Данные текущего пользователя
+  const [dataUser, setDataUser] = React.useState({ email: "", name: "" });
   //Стейт для изменения состояния залогинился пользователь или нет
   const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -37,6 +41,12 @@ function App() {
 
   //Массив ID сохраненных статей
   const [savedArticles, setSavedArticles] = React.useState([]);
+
+  //Проверяем токен при загрузке страницы
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
 
   //Открыть модалку авторизации
   function handleAuthorizationOpen() {
@@ -80,6 +90,28 @@ function App() {
       });
   };
 
+  //Проверяем токен
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      mainApi.getContent(jwt).then((res) => {
+        if (res) {
+          setDataUser({ email: res.email, name: res.name });
+          setLoggedIn(true);
+        }
+      });
+    }
+  };
+
+  // Выход из аккаунта
+
+  const signOut = () => {
+    localStorage.removeItem("jwt");
+    setDataUser({});
+    setLoggedIn(false);
+    history.push("/");
+  };
+
   //Поиск статей
   function searhcArticles(searchWord) {
     newsApi.getNews(searchWord).then((data) => {
@@ -101,11 +133,6 @@ function App() {
     });
   };
 
-  // Выйти
-  function logOut() {
-    setLoggedIn(false);
-  }
-
   function closeAllPopup(e) {
     if (e.target === e.currentTarget || e.key === "Escape") {
       setIsLoginOpen(false);
@@ -122,8 +149,9 @@ function App() {
               onAuthorizeClick={handleAuthorizationOpen}
               headerClassName="header header__main"
               loggedIn={loggedIn}
-              logOut={logOut}
+              logOut={signOut}
               onClose={closeAllPopup}
+              name={dataUser.name}
             />
             <Main searchBtnClick={searhcArticles} />
             <NewsCardList cards={newsArr} clickBtn={handleClick} />
@@ -136,10 +164,11 @@ function App() {
             <Header
               headerClassName="header header__saved-news"
               loggedIn={loggedIn}
-              logOut={logOut}
+              logOut={signOut}
               onClose={closeAllPopup}
+              name={dataUser.name}
             />
-            <SavedNews cards={savedArticles} />
+            <SavedNews cards={savedArticles} name={dataUser.name} />
           </Route>
 
           <Login

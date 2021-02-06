@@ -1,6 +1,6 @@
 import "./SavedNewsHeader.css";
 
-function SavedNewsHeader({ cards }) {
+function SavedNewsHeader({ cards, name }) {
   console.log(cards);
   return (
     <section className="saved-news-header">
@@ -8,7 +8,9 @@ function SavedNewsHeader({ cards }) {
       {cards.length > 0 ? (
         <>
           {" "}
-          <p className="saved-news__quantity">Грета, у вас {cards.length} сохранённых статей</p>
+          <p className="saved-news__quantity">
+            {name}, у вас {cards.length} сохранённых статей
+          </p>
           <p className="saved-news__keyword">
             По ключевым словам:
             <span className="saved-news__keyword-bold">
@@ -18,7 +20,7 @@ function SavedNewsHeader({ cards }) {
           </p>
         </>
       ) : (
-        <p className="saved-news__quantity">Грета, у вас 0 сохранённых статей</p>
+        <p className="saved-news__quantity">{name}, у вас 0 сохранённых статей</p>
       )}
     </section>
   );
