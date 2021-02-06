@@ -32,7 +32,7 @@ function NewsCardList({ cardsClassName, cards, clickBtn }) {
                       link={card.url}
                       source={card.source.name}
                       date={card.publishedAt}
-                      keyword={card.source.name}
+                      keyword={card.keyword}
                       id={card.id}
                     />
                   ))
@@ -46,7 +46,7 @@ function NewsCardList({ cardsClassName, cards, clickBtn }) {
                     link={card.url}
                     source={card.source.name}
                     date={card.publishedAt}
-                    keyword={card.source.name}
+                    keyword={card.keyword}
                     id={card.id}
                   />
                 ))}
@@ -60,14 +60,14 @@ function NewsCardList({ cardsClassName, cards, clickBtn }) {
               <NewsCard
                 clickBtn={clickBtn}
                 key={i}
-                id={card.id}
-                img={card.urlToImage}
+                id={card._id}
+                img={card.image}
                 title={card.title}
-                text={card.description}
+                text={card.text}
                 link={card.url}
-                source={card.source.name}
-                date={card.publishedAt}
-                keyword={card.source.name}
+                source={card.source}
+                date={card.date}
+                keyword={card.keyword}
               />
             ))}
           </ul>

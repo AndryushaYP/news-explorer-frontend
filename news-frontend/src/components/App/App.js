@@ -19,10 +19,13 @@ import * as mainApi from "../../utils/MainApi";
 
 function App() {
   //Контекст
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({ email: "", id: "", name: "" });
 
   const history = useHistory();
   //Данные текущего пользователя
+
+  // Если по запросу ничего не найдено
+  const [searchNotFound, setSearchNotFound] = React.useState(false);
   const [dataUser, setDataUser] = React.useState({ email: "", name: "" });
   //Стейт для изменения состояния залогинился пользователь или нет
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -46,7 +49,16 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-  }, []);
+    Promise.all([mainApi.getArticles(), mainApi.getUserMe()])
+      .then((res) => {
+        const [cardData, userData] = res;
+        setSavedArticles(cardData);
+        setCurrentUser(userData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [loggedIn]);
 
   //Открыть модалку авторизации
   function handleAuthorizationOpen() {
@@ -115,20 +127,43 @@ function App() {
   //Поиск статей
   function searhcArticles(searchWord) {
     newsApi.getNews(searchWord).then((data) => {
-      setNewsArr([
-        ...data.articles.map((item, id) => {
-          item.id = id;
-          return item;
-        }),
-      ]);
+      if (data.articles.length > 0) {
+        setSearchNotFound(false);
+        setNewsArr([
+          ...data.articles.map((item, id) => {
+            item.id = id;
+            item.keyword = searchWord;
+            return item;
+          }),
+        ]);
+      } else {
+        setSearchNotFound(true);
+        setNewsArr([]);
+      }
     });
   }
 
-  const handleClick = (cardId) => {
+  // Сохраняем статью
+  const handleSaveArticle = (cardId) => {
     // eslint-disable-next-line array-callback-return
     newsArr.map((item) => {
       if (item.id === cardId) {
-        setSavedArticles([...savedArticles, item]);
+        mainApi
+          .saveArticle({
+            keyword: item.keyword,
+            title: item.title,
+            text: item.description,
+            date: item.publishedAt,
+            source: item.source.name,
+            link: item.url,
+            image: item.urlToImage,
+          })
+          .then((cardData) => {
+            setSavedArticles([...savedArticles, cardData]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     });
   };
@@ -154,9 +189,9 @@ function App() {
               name={dataUser.name}
             />
             <Main searchBtnClick={searhcArticles} />
-            <NewsCardList cards={newsArr} clickBtn={handleClick} />
+            <NewsCardList cards={newsArr} clickBtn={handleSaveArticle} />
             <Preloader />
-            <ResultNotFound />
+            {searchNotFound && <ResultNotFound />}
 
             <About />
           </Route>

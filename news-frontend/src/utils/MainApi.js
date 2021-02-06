@@ -102,8 +102,8 @@ export const getContent = (token) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "Authorization" : `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   }).then((res) => {
     if (res.ok) {
       return res.json();
@@ -111,7 +111,7 @@ export const getContent = (token) => {
 
     return Promise.reject(`Ошибка: ${res.status}`);
   });
-}
+};
 
 //Данные текущего пользователя
 export const getUserMe = () => {
