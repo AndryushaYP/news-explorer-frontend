@@ -1,7 +1,6 @@
 import "./SavedNewsHeader.css";
 
 function SavedNewsHeader({ cards, name }) {
-  console.log(cards);
   return (
     <section className="saved-news-header">
       <h1 className="saved-news__title">Сохраненные статьи</h1>

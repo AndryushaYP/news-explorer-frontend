@@ -149,7 +149,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      }).finally(() => {
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   }
@@ -176,6 +177,14 @@ function App() {
             console.log(err);
           });
       }
+    });
+  };
+
+  //Удалить статью
+  const handleDeleteArticle = (cardId) => {
+    mainApi.deleteArticle(cardId).then((cardData) => {
+      const newArr = savedArticles.filter((cardEl) => cardEl._id !== cardData._id);
+      setSavedArticles(newArr);
     });
   };
 
@@ -214,7 +223,7 @@ function App() {
               onClose={closeAllPopup}
               name={dataUser.name}
             />
-            <SavedNews cards={savedArticles} name={dataUser.name} />
+            <SavedNews cards={savedArticles} name={dataUser.name} clickBtn={handleDeleteArticle} />
           </Route>
 
           <Login

@@ -3,11 +3,11 @@ import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 
 import "./SavedNews.css";
 
-function SavedNews({ cards, name }) {
+function SavedNews({ cards, name, clickBtn }) {
   return (
     <>
       <SavedNewsHeader cards={cards} name={name} />
-      <NewsCardList cardsClassName="cards_type_saved-news" cards={cards} />
+      <NewsCardList cardsClassName="cards_type_saved-news" cards={cards} clickBtn={clickBtn}/>
     </>
   );
 }

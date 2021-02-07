@@ -14,11 +14,15 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn 
   const handleMouseLeave = (e) => {
     setSpanClassName("card__span");
   };
-  const onHandleClick = (e) => {
+  const handleClickSaveBtn = (e) => {
     e.target.classList.remove("card__btn_type_save");
     e.target.classList.add("card__btn_type_save-active");
     clickBtn(id);
   };
+
+  const handleClickDeleteBtn = (e) => {
+    clickBtn(id);
+  }
 
   return (
     <li className="card">
@@ -31,7 +35,7 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn 
           <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>
           <button
             className="card__btn card__btn_type_save"
-            onClick={onHandleClick}
+            onClick={handleClickSaveBtn}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           ></button>
@@ -42,7 +46,7 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn 
           <span className={spanClassName}>Убрать из сохраненных</span>
           <button
             className="card__btn card__btn-delete"
-            type="submit"
+            onClick={handleClickDeleteBtn}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           ></button>
