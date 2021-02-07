@@ -5,11 +5,14 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 function NewsCardList({ cardsClassName, cards, clickBtn }) {
-  const [buttonClick, setButtonClick] = React.useState(false);
+  const [clickСounter, setClickСounter] = React.useState(3);
+  const [hideButton, setHideButton] = React.useState(false);
 
   const handleButton = () => {
-    console.log("меня нажали!");
-    setButtonClick(true);
+    setClickСounter(clickСounter + 3);
+    if (clickСounter >= cards.length) {
+      setHideButton(true);
+    }
   };
 
   return (
@@ -19,44 +22,26 @@ function NewsCardList({ cardsClassName, cards, clickBtn }) {
           <h1 className="cards__title">Результаты поиска</h1>
 
           <ul className="cards__list">
-            {!buttonClick
-              ? cards
-                  .slice(0, 3)
-                  .map((card, i) => (
-                    <NewsCard
-                      clickBtn={clickBtn}
-                      key={i}
-                      img={card.urlToImage}
-                      title={card.title}
-                      text={card.description}
-                      link={card.url}
-                      source={card.source.name}
-                      date={card.publishedAt}
-                      keyword={card.keyword}
-                      id={card.id}
-                    />
-                  ))
-              : cards.map((card, i) => (
-                  <NewsCard
-                    clickBtn={clickBtn}
-                    key={i}
-                    img={card.urlToImage}
-                    title={card.title}
-                    text={card.description}
-                    link={card.url}
-                    source={card.source.name}
-                    date={card.publishedAt}
-                    keyword={card.keyword}
-                    id={card.id}
-                  />
-                ))}
+            {cards.slice(0, clickСounter).map((card, i) => (
+              <NewsCard
+                clickBtn={clickBtn}
+                key={i}
+                img={card.urlToImage}
+                title={card.title}
+                text={card.description}
+                link={card.url}
+                source={card.source.name}
+                date={card.publishedAt}
+                keyword={card.keyword}
+                id={card.id}
+              />
+            ))}
           </ul>
-          <Button onClick={handleButton} name="Показать ещё" className="button button__main" />
         </Route>
 
         <Route path="/saved-news">
           <ul className="cards__list">
-            {cards.map((card, i) => (
+            {cards.slice(0, clickСounter).map((card, i) => (
               <NewsCard
                 clickBtn={clickBtn}
                 key={i}
@@ -73,6 +58,9 @@ function NewsCardList({ cardsClassName, cards, clickBtn }) {
           </ul>
         </Route>
       </Switch>
+      {!hideButton && (
+        <Button onClick={handleButton} name="Показать ещё" className="button button__main" />
+      )}
     </section>
   );
 }
