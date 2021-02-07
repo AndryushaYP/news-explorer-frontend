@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-target-blank */
 import "./NewsCard.css";
 import React from "react";
+import { monthArr } from "../../utils/constants";
 import { Route, Switch } from "react-router-dom";
 
-function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn}) {
+function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn }) {
   const [spanClassName, setSpanClassName] = React.useState("card__span");
 
   const handleMouseEnter = (e) => {
@@ -49,7 +50,9 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn}
       </Switch>
 
       <div className="card__info">
-        <p className="card__news-date">{date}</p>
+        <p className="card__news-date">{`${new Date(date).getDate()} ${
+          monthArr[new Date(date).getMonth()]
+        }, ${new Date(date).getFullYear()}`}</p>
         <h2 className="card__title">{title}</h2>
         <p className="card__text">{text}</p>
       </div>
