@@ -1,12 +1,43 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../ui/Button";
 
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose, name }) {
+function Header({ onAuthorizeClick, loggedIn, logOut, onClose, name, onClick, location }) {
   const [isOpenMenu, setIsOpenMenu] = React.useState(false);
+  const [classNameHamburgerMenu, setClassNameHamburgerMenu] = React.useState("");
+  const [classNameLogout, setClassNameLogout] = React.useState("");
+  const [classNameHeader, setClassNameHeader] = React.useState("");
+
+  React.useEffect(() => {
+    getClassName();
+  });
+
+  const getClassName = () => {
+    if (location.pathname === "/") {
+      setClassNameHamburgerMenu(!isOpenMenu ? "header__menu" : "header__menu header__menu-close");
+      setClassNameLogout(
+        !isOpenMenu
+          ? "header__link header__link_type_logout-main"
+          : "header__link header__link_type_logout-main header__link_type_visible"
+      );
+      setClassNameHeader(!isOpenMenu ? "header header__main" : "header__main header_type_mobile");
+    } else {
+      setClassNameHamburgerMenu(
+        !isOpenMenu ? "header__menu-black" : "header__menu header__menu-close"
+      );
+      setClassNameLogout(
+        !isOpenMenu
+          ? "header__link header__link_type_logout-saved-news"
+          : "header__link header__link_type_logout-saved-news header__link_type_visible"
+      );
+      setClassNameHeader(
+        !isOpenMenu ? "header header__saved-news" : "header__main header_type_mobile"
+      );
+    }
+  };
 
   const handleMenu = (e) => {
     if (!isOpenMenu) {
@@ -18,29 +49,16 @@ function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose, 
 
   return (
     <div className={!isOpenMenu ? "header__overlay" : "header__overlay_type_mobile"}>
-      <div className={!isOpenMenu ? headerClassName : "header__main header_type_mobile"}>
+      <div className={classNameHeader}>
         <Link
           className={!isOpenMenu ? "header__title" : "header__title header__title_type-mobile"}
           to="/"
         >
           NewsExplorer
         </Link>
-        <Switch>
-          <Route exact path="/">
-            <button
-              className={!isOpenMenu ? "header__menu" : "header__menu header__menu-close"}
-              onClick={handleMenu}
-            ></button>
-          </Route>
-          <Route path="/saved-news">
-            <button
-              className={!isOpenMenu ? "header__menu-black" : "header__menu header__menu-close"}
-              onClick={handleMenu}
-            ></button>
-          </Route>
-        </Switch>
-
+        <button className={classNameHamburgerMenu} onClick={handleMenu}></button>
         <Navigation
+          onClick={onClick}
           onAuthorizeClick={onAuthorizeClick}
           loggedIn={loggedIn}
           logOut={logOut}
@@ -57,34 +75,9 @@ function Header({ headerClassName, onAuthorizeClick, loggedIn, logOut, onClose, 
             }
           />
         ) : (
-          <Switch>
-            <Route exact path="/">
-              <Link
-                to="/"
-                className={
-                  !isOpenMenu
-                    ? "header__link header__link_type_logout-main"
-                    : "header__link header__link_type_logout-main header__link_type_visible"
-                }
-                onClick={logOut}
-              >
-                {name}
-              </Link>
-            </Route>
-            <Route path="/saved-news">
-              <Link
-                to="/"
-                className={
-                  !isOpenMenu
-                    ? "header__link header__link_type_logout-saved-news"
-                    : "header__link header__link_type_logout-saved-news header__link_type_visible"
-                }
-                onClick={logOut}
-              >
-                {name}
-              </Link>
-            </Route>
-          </Switch>
+          <Link to="/" className={classNameLogout} onClick={logOut}>
+            {name}
+          </Link>
         )}
       </div>
     </div>

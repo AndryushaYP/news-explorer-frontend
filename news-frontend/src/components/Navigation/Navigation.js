@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ loggedIn, isOpenMenu }) {
+function Navigation({ loggedIn, isOpenMenu, onClick }) {
   return (
     <nav className={!isOpenMenu ? "navigation" : "navigation navigation_type_visible"}>
       {!loggedIn ? (
@@ -24,6 +24,7 @@ function Navigation({ loggedIn, isOpenMenu }) {
             Главная
           </NavLink>
           <NavLink
+            onClick={onClick}
             to="/saved-news"
             className="navigation__link"
             activeClassName="navigation__link_type_active"

@@ -2,9 +2,21 @@
 import "./NewsCard.css";
 import React from "react";
 import { monthArr } from "../../utils/constants";
-import { Route, Switch } from "react-router-dom";
 
-function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn }) {
+function NewsCard({
+  location,
+  img,
+  title,
+  text,
+  link,
+  source,
+  date,
+  keyword,
+  id,
+  clickBtn,
+  loggedIn,
+  isSave,
+}) {
   const [spanClassName, setSpanClassName] = React.useState("card__span");
 
   const handleMouseEnter = (e) => {
@@ -15,14 +27,12 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn 
     setSpanClassName("card__span");
   };
   const handleClickSaveBtn = (e) => {
-    e.target.classList.remove("card__btn_type_save");
-    e.target.classList.add("card__btn_type_save-active");
-    clickBtn(id);
+    clickBtn(id, isSave);
   };
 
   const handleClickDeleteBtn = (e) => {
     clickBtn(id);
-  }
+  };
 
   return (
     <li className="card">
@@ -30,18 +40,22 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn 
       <a href={link} target="_blank" className="card__source">
         {source}
       </a>
-      <Switch>
-        <Route exact path="/">
-          <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>
+      {location.pathname === "/" && (
+        <>
+          {!loggedIn && <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>}
           <button
-            className="card__btn card__btn_type_save"
+            className={
+              isSave ? "card__btn card__btn_type_save-active" : "card__btn card__btn_type_save"
+            }
             onClick={handleClickSaveBtn}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           ></button>
-        </Route>
+        </>
+      )}
 
-        <Route path="/saved-news">
+      {location.pathname === "/saved-news" && (
+        <>
           <p className="card__keyword">{keyword}</p>
           <span className={spanClassName}>Убрать из сохраненных</span>
           <button
@@ -50,8 +64,8 @@ function NewsCard({ img, title, text, link, source, date, keyword, id, clickBtn 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           ></button>
-        </Route>
-      </Switch>
+        </>
+      )}
 
       <div className="card__info">
         <p className="card__news-date">{`${new Date(date).getDate()} ${

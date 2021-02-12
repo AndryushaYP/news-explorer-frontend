@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -16,11 +16,12 @@ import SuccessRegister from "../SuccessRegister/SuccessRegister";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import * as newsApi from "../../utils/NewsApi";
 import * as mainApi from "../../utils/MainApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   //Контекст
   const [currentUser, setCurrentUser] = React.useState({ email: "", id: "", name: "" });
-
+  const location = useLocation();
   const history = useHistory();
   //Данные текущего пользователя
 
@@ -51,11 +52,15 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-    Promise.all([mainApi.getArticles(), mainApi.getUserMe()])
+    handleClickSaveArticle();
+    if (localStorage.arrArticles) {
+      setNewsArr(JSON.parse(localStorage.getItem("arrArticles")));
+    }
+
+    mainApi
+      .getUserMe()
       .then((res) => {
-        const [cardData, userData] = res;
-        setSavedArticles(cardData);
-        setCurrentUser(userData);
+        setCurrentUser(res);
       })
       .catch((err) => {
         console.log(err);
@@ -121,13 +126,27 @@ function App() {
 
   const signOut = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("arrArticles");
     setDataUser({});
     setLoggedIn(false);
     history.push("/");
   };
 
+  //Загружаем список статей из БД
+  const handleClickSaveArticle = () => {
+    mainApi
+      .getArticles()
+      .then((res) => {
+        setSavedArticles(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   //Поиск статей
   function searhcArticles(searchWord) {
+    localStorage.removeItem("arrArticles");
     setNewsArr([]);
     setIsLoading(true);
     newsApi
@@ -135,13 +154,24 @@ function App() {
       .then((data) => {
         if (data.articles.length > 0) {
           setSearchNotFound(false);
-          setNewsArr([
-            ...data.articles.map((item, id) => {
-              item.id = id;
-              item.keyword = searchWord;
-              return item;
-            }),
-          ]);
+          localStorage.setItem(
+            "arrArticles",
+            JSON.stringify(
+              data.articles.map((item, id) => ({
+                _id: id,
+                isSave: false,
+                keyword: searchWord,
+                title: item.title,
+                text: item.description,
+                date: item.publishedAt,
+                source: item.source.name,
+                link: item.url,
+                image: item.urlToImage,
+              }))
+            )
+          );
+          const localStoregeArticles = JSON.parse(localStorage.getItem("arrArticles"));
+          setNewsArr(localStoregeArticles);
         } else {
           setSearchNotFound(true);
           setNewsArr([]);
@@ -154,37 +184,62 @@ function App() {
         setIsLoading(false);
       });
   }
-
   // Сохраняем статью
-  const handleSaveArticle = (cardId) => {
-    // eslint-disable-next-line array-callback-return
-    newsArr.map((item) => {
-      if (item.id === cardId) {
-        mainApi
-          .saveArticle({
-            keyword: item.keyword,
-            title: item.title,
-            text: item.description,
-            date: item.publishedAt,
-            source: item.source.name,
-            link: item.url,
-            image: item.urlToImage,
-          })
-          .then((cardData) => {
-            setSavedArticles([...savedArticles, cardData]);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    });
+  const handleSaveArticle = (cardId, isSave) => {
+    if (isSave === false) {
+      // eslint-disable-next-line array-callback-return
+      newsArr.map((item) => {
+        if (item._id === cardId) {
+          mainApi
+            .saveArticle({
+              keyword: item.keyword,
+              title: item.title,
+              text: item.text,
+              date: item.date,
+              source: item.source,
+              link: item.link,
+              image: item.image,
+            })
+            .then((cardData) => {
+              item._id = cardData.id;
+              setSavedArticles([...savedArticles, cardData]);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          item.isSave = !item.isSave;
+        }
+      });
+    } else {
+      // eslint-disable-next-line array-callback-return
+      newsArr.map((item) => {
+        if (item._id === cardId) {
+          handleDeleteArticle(cardId);
+          item.isSave = !item.isSave;
+        }
+      });
+    }
   };
 
   //Удалить статью
   const handleDeleteArticle = (cardId) => {
-    mainApi.deleteArticle(cardId).then((cardData) => {
-      const newArr = savedArticles.filter((cardEl) => cardEl._id !== cardData._id);
-      setSavedArticles(newArr);
+    mainApi
+      .deleteArticle(cardId)
+      .then((cardData) => {
+        const newArr = savedArticles.filter((cardEl) => {
+          return cardEl._id !== cardData._id;
+        });
+        setSavedArticles(newArr);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // eslint-disable-next-line array-callback-return
+    newsArr.map((item) => {
+      if (item._id === cardId) {
+        item.isSave = !item.isSave;
+      }
     });
   };
 
@@ -195,36 +250,42 @@ function App() {
       setIsRegisterOpen(false);
     }
   }
+
   return (
     <div className="App" onKeyDown={closeAllPopup}>
+      <Header
+        location={location}
+        onClick={handleClickSaveArticle}
+        onAuthorizeClick={handleAuthorizationOpen}
+        loggedIn={loggedIn}
+        logOut={signOut}
+        onClose={closeAllPopup}
+        name={dataUser.name}
+      />
       <Switch>
         <CurrentUserContext.Provider value={currentUser}>
           <Route exact path="/">
-            <Header
-              onAuthorizeClick={handleAuthorizationOpen}
-              headerClassName="header header__main"
-              loggedIn={loggedIn}
-              logOut={signOut}
-              onClose={closeAllPopup}
-              name={dataUser.name}
-            />
             <Main searchBtnClick={searhcArticles} />
-            <NewsCardList cards={newsArr} clickBtn={handleSaveArticle} />
+            <NewsCardList
+              cards={newsArr}
+              clickBtn={handleSaveArticle}
+              loggedIn={loggedIn}
+              location={location}
+            />
             {isLoading && <Preloader />}
             {searchNotFound && <ResultNotFound />}
 
             <About />
           </Route>
-          <Route path="/saved-news">
-            <Header
-              headerClassName="header header__saved-news"
-              loggedIn={loggedIn}
-              logOut={signOut}
-              onClose={closeAllPopup}
-              name={dataUser.name}
-            />
-            <SavedNews cards={savedArticles} name={dataUser.name} clickBtn={handleDeleteArticle} />
-          </Route>
+          <ProtectedRoute
+            path="/saved-news"
+            component={SavedNews}
+            cards={savedArticles}
+            name={dataUser.name}
+            clickBtn={handleDeleteArticle}
+            location={location}
+            loggedIn={loggedIn}
+          />
 
           <Login
             isOpen={isLoginOpen}

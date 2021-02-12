@@ -13,8 +13,8 @@ function SavedNewsHeader({ cards, name }) {
           <p className="saved-news__keyword">
             По ключевым словам:
             <span className="saved-news__keyword-bold">
-              {" " + cards[1].keyword + ", " + cards[2].keyword} и {cards.length - 2}-м
-              другим
+              {/* {" " + cards[1].keyword + ", " + cards[2].keyword} и {cards.length - 2}-м
+              другим */} Hello!
             </span>
           </p>
         </>
