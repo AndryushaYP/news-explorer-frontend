@@ -21,8 +21,10 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
   //Контекст
   const [currentUser, setCurrentUser] = React.useState({ email: "", id: "", name: "" });
+  const [errorMessage, setErrorMessage] = React.useState("");
   const location = useLocation();
   const history = useHistory();
+
   //Данные текущего пользователя
 
   // Если по запросу ничего не найдено
@@ -72,11 +74,13 @@ function App() {
     setIsSuccessRegisterOpen(false);
     setIsRegisterOpen(false);
     setIsLoginOpen(true);
+    setErrorMessage("");
   }
   //Открыть модалку регистрации
   function handleRegisterOpen() {
     setIsLoginOpen(false);
     setIsRegisterOpen(true);
+    setErrorMessage("");
   }
   //Регистрация
   const handleRegister = (email, password, name) => {
@@ -85,11 +89,13 @@ function App() {
       .then((data) => {
         if (data.email) {
           setCurrentUser(data); //Если пришёл ответ, то обновляем данные
+          setIsRegisterOpen(false);
           setIsSuccessRegisterOpen(true); // и открываем модалку успешной регистрации
         }
       })
       .catch((err) => {
         console.log(err);
+        setErrorMessage("Пользователь с таким email уже существует");
       });
   };
   //Авторизация
@@ -106,6 +112,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setErrorMessage("Неправильный email или пароль");
       });
   };
 
@@ -170,6 +177,7 @@ function App() {
               }))
             )
           );
+
           const localStoregeArticles = JSON.parse(localStorage.getItem("arrArticles"));
           setNewsArr(localStoregeArticles);
         } else {
@@ -184,9 +192,14 @@ function App() {
         setIsLoading(false);
       });
   }
+
   // Сохраняем статью
   const handleSaveArticle = (cardId, isSave) => {
-    if (isSave === false) {
+    if (!loggedIn) {
+      setIsLoginOpen(true);
+      return;
+    }
+    if (loggedIn && isSave === false) {
       // eslint-disable-next-line array-callback-return
       newsArr.map((item) => {
         if (item._id === cardId) {
@@ -235,14 +248,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-    // eslint-disable-next-line array-callback-return
-    newsArr.map((item) => {
-      if (item._id === cardId) {
-        item.isSave = !item.isSave;
-      }
-    });
   };
-
   function closeAllPopup(e) {
     if (e.target === e.currentTarget || e.key === "Escape") {
       setIsLoginOpen(false);
@@ -252,7 +258,7 @@ function App() {
   }
 
   return (
-    <div className="App" onKeyDown={closeAllPopup}>
+    <div className="App" onKeyDown={closeAllPopup} onClick={closeAllPopup}>
       <Header
         location={location}
         onClick={handleClickSaveArticle}
@@ -262,8 +268,9 @@ function App() {
         onClose={closeAllPopup}
         name={dataUser.name}
       />
-      <Switch>
-        <CurrentUserContext.Provider value={currentUser}>
+
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
           <Route exact path="/">
             <Main searchBtnClick={searhcArticles} />
             <NewsCardList
@@ -286,28 +293,29 @@ function App() {
             location={location}
             loggedIn={loggedIn}
           />
+        </Switch>
+        <Login
+          isOpen={isLoginOpen}
+          onClose={closeAllPopup}
+          onLogin={handleLogin}
+          changeModal={handleRegisterOpen}
+          validationError={errorMessage}
+        />
 
-          <Login
-            isOpen={isLoginOpen}
-            onClose={closeAllPopup}
-            onLogin={handleLogin}
-            changeModal={handleRegisterOpen}
-          />
+        <Register
+          isOpen={isRegisterOpen}
+          onClose={closeAllPopup}
+          onRegister={handleRegister}
+          changeModal={handleAuthorizationOpen}
+          validationError={errorMessage}
+        />
 
-          <Register
-            isOpen={isRegisterOpen}
-            onClose={closeAllPopup}
-            onRegister={handleRegister}
-            changeModal={handleAuthorizationOpen}
-          />
-
-          <SuccessRegister
-            isOpen={isSuccessRegisterOpen}
-            onClose={closeAllPopup}
-            changeModal={handleAuthorizationOpen}
-          />
-        </CurrentUserContext.Provider>
-      </Switch>
+        <SuccessRegister
+          isOpen={isSuccessRegisterOpen}
+          onClose={closeAllPopup}
+          changeModal={handleAuthorizationOpen}
+        />
+      </CurrentUserContext.Provider>
 
       <Footer />
     </div>

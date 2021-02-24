@@ -5,14 +5,19 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <p className="footer__copyright">&copy; 2020 Supresite, Powered by News API</p>
       <nav className="footer__navigation">
         <div className="footer__navigation-column-link">
           <Link className="footer__link" to="/">
             Главная
           </Link>
-          <a href="https://praktikum.yandex.ru/" rel="noreferrer" target="_blank" className="footer__link">
+          <a
+            href="https://praktikum.yandex.ru/"
+            rel="noreferrer"
+            target="_blank"
+            className="footer__link"
+          >
             Яндекс.Практикум
           </a>
         </div>
@@ -26,7 +31,7 @@ function Footer() {
           </a>
         </div>
       </nav>
-    </div>
+    </footer>
   );
 }
 

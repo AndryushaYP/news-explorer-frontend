@@ -29,7 +29,7 @@ function NewsCardList({ location, cardsClassName, cards, clickBtn, loggedIn }) {
             img={card.image}
             title={card.title}
             text={card.text}
-            link={card.url}
+            link={card.link}
             source={card.source}
             date={card.date}
             keyword={card.keyword}

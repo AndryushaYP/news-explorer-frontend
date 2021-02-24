@@ -49,7 +49,7 @@ function Header({ onAuthorizeClick, loggedIn, logOut, onClose, name, onClick, lo
 
   return (
     <div className={!isOpenMenu ? "header__overlay" : "header__overlay_type_mobile"}>
-      <div className={classNameHeader}>
+      <header className={classNameHeader}>
         <Link
           className={!isOpenMenu ? "header__title" : "header__title header__title_type-mobile"}
           to="/"
@@ -79,7 +79,7 @@ function Header({ onAuthorizeClick, loggedIn, logOut, onClose, name, onClick, lo
             {name}
           </Link>
         )}
-      </div>
+      </header>
     </div>
   );
 }

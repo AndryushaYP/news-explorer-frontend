@@ -2,22 +2,20 @@ import React from "react";
 import "./Login.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../ui/Input";
+import validationForm from "../ValidationFormHook/validationForm";
 
-function Login({ onLogin, isOpen, onClose, changeModal }) {
-  const [data, setData] = React.useState({ email: "", password: "" });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+function Login({ onLogin, isOpen, onClose, changeModal, validationError }) {
+  const validationLogin = validationForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = data;
+    const { email, password } = validationLogin.values;
     onLogin(email, password);
+  };
+
+  const clearForm = (e) => {
+    onClose(e);
+    validationLogin.resetForm();
   };
 
   return (
@@ -27,10 +25,12 @@ function Login({ onLogin, isOpen, onClose, changeModal }) {
       title={"Вход"}
       btnValue={"Войти"}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={clearForm}
       changeModalValue="Зарегистрироваться"
       changeModal={changeModal}
       text="или "
+      isValid={validationLogin.isValid}
+      errorValidation={validationError}
     >
       <Input
         labelValue="Email"
@@ -38,16 +38,18 @@ function Login({ onLogin, isOpen, onClose, changeModal }) {
         type="email"
         name="email"
         className="popup__input"
-        errorText="Неправильный формат email"
-        onChange={handleChange}
+        errorText={validationLogin.errors.email}
+        onChange={validationLogin.handleChange}
       />
       <Input
         labelValue="Пароль"
         placeholder="Введите пароль"
         type="password"
+        minLength="8"
         name="password"
         className="popup__input"
-        onChange={handleChange}
+        errorText={validationLogin.errors.password}
+        onChange={validationLogin.handleChange}
       />
     </PopupWithForm>
   );

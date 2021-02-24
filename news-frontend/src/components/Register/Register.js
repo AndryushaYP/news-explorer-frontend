@@ -2,21 +2,14 @@ import React from "react";
 import "./Register.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../ui/Input";
+import validationForm from "../ValidationFormHook/validationForm";
 
-function Register({ onRegister, isOpen, onClose, changeModal }) {
-  const [data, setData] = React.useState({ email: "", password: "", name: "" });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+function Register({ onRegister, isOpen, onClose, changeModal, validationError }) {
+  const validationRegister = validationForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { password, email, name } = data;
+    const { password, email, name } = validationRegister.values;
     onRegister(password, email, name);
   };
 
@@ -27,12 +20,12 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
       title={"Регистрация"}
       btnValue={"Зарегистрироваться"}
       isOpen={isOpen}
+      isValid={validationRegister.isValid}
       onClose={onClose}
       changeModalValue="Войти"
       changeModal={changeModal}
       text="или "
-      errorValidation="Такой пользователь уже есть"
-      modifier="popup__button_type_disable"
+      errorValidation={validationError}
     >
       <Input
         labelValue="Email"
@@ -40,7 +33,8 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="email"
         name="email"
         className="popup__input"
-        onChange={handleChange}
+        errorText={validationRegister.errors.email}
+        onChange={validationRegister.handleChange}
       />
       <Input
         labelValue="Пароль"
@@ -48,7 +42,9 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="password"
         name="password"
         className="popup__input"
-        onChange={handleChange}
+        errorText={validationRegister.errors.password}
+        onChange={validationRegister.handleChange}
+        minLength="8"
       />
 
       <Input
@@ -57,7 +53,9 @@ function Register({ onRegister, isOpen, onClose, changeModal }) {
         type="name"
         name="name"
         className="popup__input"
-        onChange={handleChange}
+        errorText={validationRegister.errors.name}
+        onChange={validationRegister.handleChange}
+        minLength="2"
       />
     </PopupWithForm>
   );
