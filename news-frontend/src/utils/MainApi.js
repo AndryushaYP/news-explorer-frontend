@@ -3,8 +3,10 @@ const BASE_URL = "https://api.tagnerdiplom.students.nomoredomains.icu";
 //Получить список сохраненных статей
 export const getArticles = () => {
   return fetch(`${BASE_URL}/articles`, {
+    mode: "no-cors",
     method: "GET",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.jwt}`,
     },
@@ -20,8 +22,10 @@ export const getArticles = () => {
 //Запрос на добавление статьи в избранное
 export const saveArticle = ({ keyword, title, text, date, source, link, image }) => {
   return fetch(`${BASE_URL}/articles`, {
+    mode: "no-cors",
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.jwt}`,
     },
@@ -46,8 +50,10 @@ export const saveArticle = ({ keyword, title, text, date, source, link, image })
 //Удалить статью
 export const deleteArticle = (id) => {
   return fetch(`${BASE_URL}/articles/${id}`, {
+    mode: "no-cors",
     method: "DELETE",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.jwt}`,
     },
@@ -63,6 +69,7 @@ export const deleteArticle = (id) => {
 //Авторизация
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
+    mode: "no-cors",
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -81,6 +88,7 @@ export const login = (email, password) => {
 //Регистрация
 export const register = (password, email, name) => {
   return fetch(`${BASE_URL}/signup`, {
+    mode: "no-cors",
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -98,6 +106,7 @@ export const register = (password, email, name) => {
 
 export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
+    mode: "no-cors",
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -116,8 +125,10 @@ export const getContent = (token) => {
 //Данные текущего пользователя
 export const getUserMe = () => {
   return fetch(`${BASE_URL}/users/me`, {
+    mode: "no-cors",
     method: "GET",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.jwt}`,
     },
