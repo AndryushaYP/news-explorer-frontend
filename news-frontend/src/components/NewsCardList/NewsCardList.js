@@ -1,72 +1,44 @@
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
-import arrCard from "../../utils/arrCard";
 import Button from "../ui/Button";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
 
-function NewsCardList({ cardsClassName }) {
-  const [buttonClick, setButtonClick] = React.useState(false);
+function NewsCardList({ location, cardsClassName, cards, clickBtn, loggedIn }) {
+  const [clickСounter, setClickСounter] = React.useState(3);
+  const [hideButton, setHideButton] = React.useState(false);
 
   const handleButton = () => {
-    console.log("меня нажали!");
-    setButtonClick(true);
+    setClickСounter(clickСounter + 3);
+    if (clickСounter >= cards.length) {
+      setHideButton(true);
+    }
   };
+
   return (
-    <section className={`cards ${cardsClassName}`}>
-      <Switch>
-        <Route exact path="/">
-          <h1 className="cards__title">Результаты поиска</h1>
-
-          <ul className="cards__list">
-            {!buttonClick
-              ? arrCard
-                  .slice(0, 3)
-                  .map((card) => (
-                    <NewsCard
-                      key={card.id}
-                      img={card.img}
-                      title={card.title}
-                      text={card.text}
-                      link={card.link}
-                      source={card.source}
-                      date={card.date}
-                      keyword={card.keyword}
-                    />
-                  ))
-              : arrCard.map((card) => (
-                  <NewsCard
-                    key={card.id}
-                    img={card.img}
-                    title={card.title}
-                    text={card.text}
-                    link={card.link}
-                    source={card.source}
-                    date={card.date}
-                    keyword={card.keyword}
-                  />
-                ))}
-          </ul>
-          <Button onClick={handleButton} name="Показать ещё" className="button button__main" />
-        </Route>
-
-        <Route path="/saved-news">
-          <ul className="cards__list">
-            {arrCard.map((card) => (
-              <NewsCard
-                key={card.id}
-                img={card.img}
-                title={card.title}
-                text={card.text}
-                link={card.link}
-                source={card.source}
-                date={card.date}
-                keyword={card.keyword}
-              />
-            ))}
-          </ul>
-        </Route>
-      </Switch>
+    <section className={cards.length > 0 ? `cards ${cardsClassName}` : "cards cards__invisible"}>
+      {location.pathname === "/" && <h1 className="cards__title">Результаты поиска</h1>}
+      <ul className="cards__list">
+        {cards.slice(0, clickСounter).map((card, i) => (
+          <NewsCard
+            location={location}
+            loggedIn={loggedIn}
+            clickBtn={clickBtn}
+            key={i}
+            isSave={card.isSave}
+            id={card._id}
+            img={card.image}
+            title={card.title}
+            text={card.text}
+            link={card.link}
+            source={card.source}
+            date={card.date}
+            keyword={card.keyword}
+          />
+        ))}
+      </ul>
+      {!hideButton && (
+        <Button onClick={handleButton} name="Показать ещё" className="button button__main" />
+      )}
     </section>
   );
 }

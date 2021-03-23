@@ -10,6 +10,7 @@ function Input({
   minLength,
   maxLength,
   errorText,
+  onChange,
 }) {
   return (
     <label className="popup__label">
@@ -23,6 +24,7 @@ function Input({
         minLength={minLength}
         maxLength={maxLength}
         required
+        onChange={onChange}
       />
       <span className="popup__error popup__error_visible" id={`${name}-error`}>
         {errorText}
