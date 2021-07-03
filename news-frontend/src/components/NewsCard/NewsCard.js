@@ -1,8 +1,22 @@
+/* eslint-disable react/jsx-no-target-blank */
 import "./NewsCard.css";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { monthArr } from "../../utils/constants";
 
-function NewsCard({ img, title, text, link, source, date, keyword }) {
+function NewsCard({
+  location,
+  img,
+  title,
+  text,
+  link,
+  source,
+  date,
+  keyword,
+  id,
+  clickBtn,
+  loggedIn,
+  isSave,
+}) {
   const [spanClassName, setSpanClassName] = React.useState("card__span");
 
   const handleMouseEnter = (e) => {
@@ -12,10 +26,12 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
   const handleMouseLeave = (e) => {
     setSpanClassName("card__span");
   };
+  const handleClickSaveBtn = (e) => {
+    clickBtn(id, isSave);
+  };
 
-  const onHandleClick = (e) => {
-    e.target.classList.remove("card__btn_type_save");
-    e.target.classList.add("card__btn_type_save-active");
+  const handleClickDeleteBtn = (e) => {
+    clickBtn(id);
   };
 
   return (
@@ -24,32 +40,37 @@ function NewsCard({ img, title, text, link, source, date, keyword }) {
       <a href={link} target="_blank" className="card__source">
         {source}
       </a>
-      <Switch>
-        <Route exact path="/">
-          <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>
+      {location.pathname === "/" && (
+        <>
+          {!loggedIn && <span className={spanClassName}>Войдите, чтобы сохранять статьи</span>}
           <button
-            className="card__btn card__btn_type_save"
-            type="submit"
-            onClick={onHandleClick}
+            className={
+              isSave ? "card__btn card__btn_type_save-active" : "card__btn card__btn_type_save"
+            }
+            onClick={handleClickSaveBtn}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           ></button>
-        </Route>
+        </>
+      )}
 
-        <Route path="/saved-news">
+      {location.pathname === "/saved-news" && (
+        <>
           <p className="card__keyword">{keyword}</p>
           <span className={spanClassName}>Убрать из сохраненных</span>
           <button
             className="card__btn card__btn-delete"
-            type="submit"
+            onClick={handleClickDeleteBtn}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           ></button>
-        </Route>
-      </Switch>
+        </>
+      )}
 
       <div className="card__info">
-        <p className="card__news-date">{date}</p>
+        <p className="card__news-date">{`${new Date(date).getDate()} ${
+          monthArr[new Date(date).getMonth()]
+        }, ${new Date(date).getFullYear()}`}</p>
         <h2 className="card__title">{title}</h2>
         <p className="card__text">{text}</p>
       </div>

@@ -62,9 +62,7 @@
 }
 
 .popup__button {
-  cursor: pointer;
   align-self: center;
-  background: #2f71e5;
   border-radius: 100px;
   height: 64px;
   border: none;
@@ -75,8 +73,13 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
-  color: white;
   transition: 0.7s ease;
+}
+
+.popup__button_type_active {
+  cursor: pointer;
+  background: #2f71e5;
+  color: white;
 }
 
 .popup__button_type_disable {
@@ -85,11 +88,11 @@
   background: #e6e8eb;
 }
 
-.popup__button:hover {
+.popup__button_type_active:hover {
   background: #347eff;
 }
 
-.popup__button:active {
+.popup__button_type_active:active {
   background: #2a65cc;
 }
 
